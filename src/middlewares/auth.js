@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { getError } from "../helpers.js";
+import { getError } from "../utils/helpers.js";
 
 const Auth = (req, res, next) => {
   try {
@@ -12,7 +12,7 @@ const Auth = (req, res, next) => {
     const [tokenType, token] = authorization.split(" ");
 
     if (tokenType !== "Bearer") {
-        getError("El token debe ser de tipo 'Bearer'", 400);
+      getError("El token debe ser de tipo 'Bearer'", 400);
     }
 
     let tokenPayload;
@@ -20,7 +20,7 @@ const Auth = (req, res, next) => {
     try {
       tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
-        getError("El token es inválido", 400);
+      getError("El token es inválido", 400);
     }
 
     req.auth = tokenPayload;
