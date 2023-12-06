@@ -20,14 +20,14 @@ app.use(morgan("dev"));
 const allowedHttp = ["http:/localhost:3030", "http:/localhost:3001"];
 app.use(cors({ origin: allowedHttp }));
 
+//Middleware llamando a las rutas
+app.use(userRoutes);
+
 // Gestión de error 404: Not Found
 app.use(notFoundController);
 
 // Uso del middleware de errores
 app.use(errorController);
-
-//Middleware llamando a las rutas
-app.use(userRoutes);
 
 // Levantamos el servicio
 app.listen(PORT, () => {
