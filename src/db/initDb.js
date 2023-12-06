@@ -5,9 +5,7 @@ const create = async () => {
     let pool = await getPool();
 
     console.log("Borrando tablas...");
-    await pool.query(
-      "DROP TABLE IF EXISTS users,locations,experiences, photos"
-    );
+    await pool.query("DROP TABLE IF EXISTS photos,experiences,locations,users");
 
     console.log("Creando tabla users...");
     await pool.query(`
@@ -16,8 +14,8 @@ const create = async () => {
             name VARCHAR(64) UNIQUE,
             email VARCHAR(255) UNIQUE,
             password VARCHAR(64) NOT NULL,
-            profilePictureURL VARCHAR(255),
-        );
+            profilePictureURL VARCHAR(255)
+        )
         `);
 
     console.log("Creando tabla locations...");
@@ -28,7 +26,7 @@ const create = async () => {
             subLocality VARCHAR(255),
             city VARCHAR(255) NOT NULL,
             country VARCHAR(255) NOT NULL
-        );
+        )
         `);
 
     console.log("Creando tabla experiences...");
@@ -42,7 +40,7 @@ const create = async () => {
             
             FOREIGN KEY (locationId) REFERENCES locations(id),
             FOREIGN KEY (ownerId) REFERENCES users(id)
-        );
+        )
         `);
     console.log("Creando tabla photos...");
     await pool.query(`
@@ -52,7 +50,7 @@ const create = async () => {
             experienceId INT UNSIGNED NOT NULL,
             
             FOREIGN KEY (experienceId) REFERENCES experiences(id)
-        );
+        )
         `);
 
     await pool.end();
