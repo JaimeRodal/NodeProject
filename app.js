@@ -6,6 +6,7 @@ import {
   notFoundController,
   errorController,
 } from "./src/controllers/errors/index.js";
+import userRoutes from "./src/routes/index.js";
 // Usamos express
 const app = express();
 
@@ -24,6 +25,9 @@ app.use(notFoundController);
 
 // Uso del middleware de errores
 app.use(errorController);
+
+//Middleware llamando a las rutas
+app.use(userRoutes);
 
 // Levantamos el servicio
 app.listen(PORT, () => {

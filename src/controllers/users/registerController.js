@@ -4,7 +4,7 @@ import sendMailUtil from "../../utils/sendMail.js";
 const pool = await getPool();
 
 const register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, lastName, email, password } = req.body;
   const [[emailExists]] = await pool.query(
     `SELECT * FROM users WHERE email=?`,
     [email]
@@ -19,8 +19,9 @@ const register = async (req, res) => {
   // Hasheando el password
 
   const hashedPass = await bcrypt.hash(password, 10);
-  await pool.query(`INSERT INTO users (name, email,password VALUES (?,?,?)`, [
+  await pool.query(`INSERT INTO users (name, email,password) VALUES (?,?,?)`, [
     name,
+    lastName,
     email,
     hashedPass,
   ]);

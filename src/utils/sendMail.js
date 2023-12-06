@@ -1,6 +1,6 @@
 // Importamos nuestras dependencias
 import nodemailer from "nodemailer";
-import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD } from "../../env.js";
+import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } from "../../env.js";
 
 // Preparando el transporte de nuestro correo
 const transport = nodemailer.createTransport({
@@ -8,7 +8,7 @@ const transport = nodemailer.createTransport({
   port: SMTP_PORT,
   auth: {
     user: SMTP_USER,
-    pass: SMTP_PASSWORD,
+    pass: SMTP_PASS,
   },
 });
 
@@ -23,7 +23,7 @@ const sendMailUtil = async (email, subject, body) => {
     };
     await transport.sendMail(mailOptions);
   } catch (error) {
-    console.error("ERRORAAAASO PAPÁ" + error);
+    console.error("error al enviar el email" + error);
   }
 };
 
