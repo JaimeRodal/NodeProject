@@ -2,7 +2,10 @@ import express from "express";
 import { PORT, HOST_DB } from "./env.js";
 import morgan from "morgan";
 import cors from "cors";
-
+import {
+  notFoundController,
+  errorController,
+} from "./src/controllers/errors/index.js";
 // Usamos express
 const app = express();
 
@@ -15,6 +18,12 @@ app.use(morgan("dev"));
 // Usamos CORS para proteger las peticiones al servicio solamente con los http permitidos
 const allowedHttp = ["http:/localhost:3030", "http:/localhost:3001"];
 app.use(cors({ origin: allowedHttp }));
+
+// Gestión de error 404: Not Found
+app.use(notFoundController);
+
+// Uso del middleware de errores
+app.use(errorController);
 
 // Levantamos el servicio
 app.listen(PORT, () => {
