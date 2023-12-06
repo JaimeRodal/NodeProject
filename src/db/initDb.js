@@ -16,7 +16,7 @@ const create = async () => {
             name VARCHAR(64) UNIQUE,
             email VARCHAR(255) UNIQUE,
             password VARCHAR(64) NOT NULL,
-            profilePictureURL VARCHAR(255),
+            profilePictureURL VARCHAR(255)
         );
         `);
 

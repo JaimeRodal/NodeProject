@@ -2,7 +2,7 @@
   "type": "module",
   "name": "proyectonode",
   "version": "1.0.0",
-  "description": "",
+  "description": "2nd Hack a boss project using NodeJs",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,5 +20,6 @@
     "mysql2": "^3.6.5",
     "nodemailer": "^6.9.7",
     "nodemon": "^3.0.2"
-  }
+  },
+  "devDependencies": {}
 }
