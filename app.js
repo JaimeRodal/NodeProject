@@ -6,7 +6,7 @@ import {
   notFoundController,
   errorController,
 } from "./src/controllers/errors/index.js";
-import routes from "./src/routes/index.js";
+import userRoutes from "./src/routes/index.js";
 // Usamos express
 const app = express();
 
@@ -20,14 +20,14 @@ app.use(morgan("dev"));
 const allowedHttp = ["http:/localhost:3030", "http:/localhost:3001"];
 app.use(cors({ origin: allowedHttp }));
 
-// LLamamos al uso de nuestras rutas
-app.use(routes);
-
 // Gestión de error 404: Not Found
 app.use(notFoundController);
 
 // Uso del middleware de errores
 app.use(errorController);
+
+//Middleware llamando a las rutas
+app.use(userRoutes);
 
 // Levantamos el servicio
 app.listen(PORT, () => {
