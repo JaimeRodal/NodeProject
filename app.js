@@ -6,6 +6,7 @@ import {
   notFoundController,
   errorController,
 } from "./src/controllers/errors/index.js";
+import routes from "./src/routes/index.js";
 // Usamos express
 const app = express();
 
@@ -18,6 +19,9 @@ app.use(morgan("dev"));
 // Usamos CORS para proteger las peticiones al servicio solamente con los http permitidos
 const allowedHttp = ["http:/localhost:3030", "http:/localhost:3001"];
 app.use(cors({ origin: allowedHttp }));
+
+// LLamamos al uso de nuestras rutas
+app.use(routes);
 
 // Gestión de error 404: Not Found
 app.use(notFoundController);
