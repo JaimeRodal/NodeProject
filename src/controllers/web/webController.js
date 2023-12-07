@@ -6,11 +6,11 @@ const pool = await getPool();
 // Creamos la función que buscará las experiencias y nos las devolverá todas las experiencias ordenadas de la más nueva a la más antigua
 const webController = async (req, res) => {
   const [exp] = await pool.query(`
-    SELECT * FROM experiences ORDER BY createdAt DESC
+    SELECT exp.title,exp.subTitle,exp.place,exp.text, exp.photo, cat.name FROM experiences exp, categories cat WHERE exp.category_id = cat.id ORDER BY exp.createdAt DESC
     `);
 
   res.send({
-    status: "ok",
+    status: "Correcto",
     data: exp,
   });
 };
