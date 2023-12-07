@@ -4,4 +4,4 @@ import { insertExperience } from "../models/index.js";
 
 const router = express.Router();
 
-router.post("/experiences", Auth, insertExperience);
+router.post("/experience", Auth, insertExperience);
