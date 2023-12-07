@@ -17,6 +17,7 @@ app.use(
 
 app.post("/register", async (req, res, next) => {
   try {
+    // Obtenemos los parámetros necesarios para el registro del body de la petición
     const { name, lastName, email, password } = req.body;
 
     // Verificar si se cargó un archivo
@@ -33,6 +34,7 @@ app.post("/register", async (req, res, next) => {
       [email]
     );
 
+    // De existir un usuario con el mismo email, generar un error con mensaje
     if (emailExists) {
       throw genError("El email ya está en uso", 400);
     }
