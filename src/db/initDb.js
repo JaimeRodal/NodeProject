@@ -16,7 +16,7 @@ const create = async () => {
             name VARCHAR(50) NOT NULL,
             lastName VARCHAR(50) NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(50) NOT NULL,
+            password VARCHAR(80) NOT NULL,
             photo VARCHAR(200),
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP            

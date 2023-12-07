@@ -38,6 +38,7 @@ const login = async (req, res) => {
       expiresIn: "2d",
     }
   );
+
   res.status(200).json({
     message: "Bienvenid@",
     token,

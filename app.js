@@ -7,6 +7,7 @@ import {
   errorController,
 } from "./src/controllers/errors/index.js";
 import userRoutes from "./src/routes/index.js";
+import { insertExperience } from "./src/models/index.js";
 // Usamos express
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(cors({ origin: allowedHttp }));
 
 //Middleware llamando a las rutas
 app.use(userRoutes);
+
+//Middleware insertar experiencia
 
 // Gestión de error 404: Not Found
 app.use(notFoundController);
