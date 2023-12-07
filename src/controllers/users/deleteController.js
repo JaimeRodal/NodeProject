@@ -1,13 +1,10 @@
 import getPool from "../../db/getPool.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import genError from "../../utils/helpers.js";
 
 const pool = await getPool();
 
 const deleteController = async (req, res, next) => {
   try {
-    console.log(req.auth);
     const { id } = req.params;
     const [[user]] = await pool.query(
       `
@@ -15,8 +12,6 @@ const deleteController = async (req, res, next) => {
     `,
       [id]
     );
-    console.log(id);
-    console.log(user);
     if (req.auth !== user.id) {
       throw genError("No puedes borrar el perfíl de otro usuario", 401);
     }
