@@ -5,36 +5,27 @@ const pool = await getPool();
 const insertExperience = async ({
   id,
   title,
-  subTitle,
+  subtitle,
   place,
   text,
+  photo,
   loggedUserId,
   category_id,
-  createdAt,
-  updatedAt,
 }) => {
   try {
     const [{ insertId }] = await pool.query(
       `INSERT INTO experiences (
+        id,
         title,
-        subTitle,
-        place,
-        text,
-        user_id,
-        category_id,
-        createdAt,
-        updatedAt) VALUES (?,?,?,?,DEFAULT, DEFAULT )`,
-      [
-        title,
-        subTitle,
+        subtitle,
         place,
         text,
         photo,
-        loggedUserId,
+        user_id,
         category_id,
         createdAt,
-        updatedAt,
-      ]
+        updatedAt) VALUES (?,?,?,?,?,?,?,?,NOW(), NOW())`,
+      [id, title, subtitle, place, text, photo, loggedUserId, category_id]
     );
     return insertId;
   } catch {
