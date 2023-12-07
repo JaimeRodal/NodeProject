@@ -2,6 +2,8 @@
 import nodemailer from "nodemailer";
 import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } from "../../env.js";
 
+// Nodemailer es una dependencia externa que nos permite enviar correos electrónicos personalizados
+
 // Preparando el transporte de nuestro correo
 const transport = nodemailer.createTransport({
   host: SMTP_HOST,
@@ -12,7 +14,7 @@ const transport = nodemailer.createTransport({
   },
 });
 
-// Realizar el envío del correo al usuario
+// Creamos la finción para realizar el envío del correo al usuario al registrarse
 const sendMailUtil = async (email, subject, body) => {
   try {
     const mailOptions = {

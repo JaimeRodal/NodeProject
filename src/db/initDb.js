@@ -1,14 +1,17 @@
 import getPool from "./getPool.js";
 
+// Creamos una función para generar tablas dentro de nuestra DB
 const create = async () => {
   try {
     let pool = await getPool();
 
+    // En caso de ya existir, borramos las tablas antes de crear unas nuevas
     console.log("Borrando tablas...");
     await pool.query(
       "DROP TABLE IF EXISTS votes, answerComments, comments, experiences, categories, users"
     );
 
+    // Una vez borradas, las volvemos a crear
     console.log("Creando tabla users...");
     await pool.query(`
         CREATE TABLE IF NOT EXISTS users (
@@ -16,7 +19,7 @@ const create = async () => {
             name VARCHAR(50) NOT NULL,
             lastName VARCHAR(50) NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(100) NOT NULL,
+            password VARCHAR(200) NOT NULL,
             photo VARCHAR(200),
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP            

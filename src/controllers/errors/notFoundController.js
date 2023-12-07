@@ -1,3 +1,4 @@
+// Middleware de ruta no encontrada
 const notFoundController = (req, res) => {
   res.status(404).send({
     status: "error",
@@ -5,4 +6,5 @@ const notFoundController = (req, res) => {
   });
 };
 
+// Exportamos la función
 export default notFoundController;

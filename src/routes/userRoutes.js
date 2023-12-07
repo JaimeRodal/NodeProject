@@ -9,6 +9,7 @@ import {
 //Enrutador de express
 const router = express.Router();
 
+// Creamos las distintas rutas con sus métodos
 router.post("/register", registerController);
 router.post("/login", loginController);
 router.delete("/delete/:id", Auth, deleteController);
