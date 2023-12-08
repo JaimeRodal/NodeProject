@@ -18,6 +18,13 @@ const deleteController = async (req, res, next) => {
     );
 
     // Comprobamos si el usuario autorizado y el que se va a borrar son los mismos, ya que solo puedes borrarlo si es TU perfíl
+    if (!user) {
+      throw genError(
+        "No puedes borrar el perfíl de otro usuario o no existe",
+        401
+      );
+    }
+
     if (req.auth !== user.id) {
       throw genError("No puedes borrar el perfíl de otro usuario", 401);
     }
