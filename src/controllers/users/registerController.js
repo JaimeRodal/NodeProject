@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-app.post("/register", async (req, res, next) => {
+const register = async (req, res, next) => {
   try {
     // Obtenemos los parámetros necesarios para el registro del body de la petición
     const { name, lastName, email, password } = req.body;
@@ -42,10 +42,6 @@ app.post("/register", async (req, res, next) => {
     // Hashear la contraseña
     const hashedPass = await bcrypt.hash(password, 5);
 
-    // Guardar la imagen en la carpeta "uploads"
-    const nombreArchivoFinal = Date.now() + "-" + avatar.name;
-    avatar.mv(`./uploads/${nombreArchivoFinal}`);
-
     // Insertar el nuevo usuario en la base de datos con la ruta de la imagen de perfil
     await pool.query(
       `INSERT INTO users (name, lastName, email, password, photo) VALUES (?, ?, ?, ?, ?)`,
@@ -59,12 +55,16 @@ app.post("/register", async (req, res, next) => {
     // Enviar el correo electrónico
     await sendMailUtil(email, emailSubject, emailBody);
 
+    // Guardar la imagen en la carpeta "uploads"
+    const nombreArchivoFinal = Date.now() + "-" + avatar.name;
+    avatar.mv(`./uploads/${nombreArchivoFinal}`);
+
     res.status(200).json({
       message: "Usuario creado con éxito!",
     });
   } catch (error) {
     next(error);
   }
-});
+};
 
-export default app;
+export default register;
