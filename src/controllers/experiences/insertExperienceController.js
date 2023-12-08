@@ -6,8 +6,9 @@ const pool = await getPool();
 
 const insertExperienceController = async (req, res) => {
   const { title, subtitle, place, text, photo } = req.body;
+  const { loggedUserId } = req.params;
+
   const id = 1;
-  const loggedUserId = 1;
   const category_id = 1;
 
   // console.log(title + subtitle + place + text);
