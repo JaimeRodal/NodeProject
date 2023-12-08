@@ -14,6 +14,6 @@ const router = express.Router();
 router.post("/register", registerController);
 router.post("/login", loginController);
 router.delete("/delete/:id", Auth, deleteController);
-router.put("/modify/:userId", Auth, modifyController);
+router.put("/modify/:id", Auth, modifyController);
 
 export default router;

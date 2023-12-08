@@ -21,12 +21,18 @@ const register = async (req, res, next) => {
     const { name, lastName, email, password } = req.body;
 
     // Verificar si se cargó un archivo
-    if (!req.files || !req.files.avatar) {
-      throw genError("Debes subir un archivo", 400);
-    }
+    let photoPath = null;
+    if (req.files && req.files.avatar) {
+      // Obtener el archivo de la solicitud
+      const avatar = req.files.avatar;
 
-    // Obtener el archivo de la solicitud
-    const avatar = req.files.avatar;
+      // Guardar la imagen en la carpeta "uploads"
+      const nombreArchivoFinal = Date.now() + "-" + avatar.name;
+      avatar.mv(`./uploads/${nombreArchivoFinal}`);
+
+      // Establecer la ruta de la foto en caso de que se haya subido
+      photoPath = `../../uploads/${nombreArchivoFinal}`;
+    }
 
     // Verificar si el email ya está en uso
     const [[emailExists]] = await pool.query(
@@ -45,7 +51,7 @@ const register = async (req, res, next) => {
     // Insertar el nuevo usuario en la base de datos con la ruta de la imagen de perfil
     await pool.query(
       `INSERT INTO users (name, lastName, email, password, photo) VALUES (?, ?, ?, ?, ?)`,
-      [name, lastName, email, hashedPass, `../../uploads/${nombreArchivoFinal}`]
+      [name, lastName, email, hashedPass, photoPath]
     );
 
     // Nodemailer para los que se registran
@@ -54,10 +60,6 @@ const register = async (req, res, next) => {
 
     // Enviar el correo electrónico
     await sendMailUtil(email, emailSubject, emailBody);
-
-    // Guardar la imagen en la carpeta "uploads"
-    const nombreArchivoFinal = Date.now() + "-" + avatar.name;
-    avatar.mv(`./uploads/${nombreArchivoFinal}`);
 
     res.status(200).json({
       message: "Usuario creado con éxito!",

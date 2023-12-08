@@ -11,14 +11,13 @@ const pool = await getPool();
 
 app.use(fileUpload({ createParentPath: true }));
 
-//Aqui usamos el .put para empezar la modificacion
-
+//Funcion para modificar los datos
 const modify = async (req, res, next) => {
   try {
     //Guardamos el id del usuario autenticado con el token en una constante
-    const authUserId = req.userId;
+    const authUserId = req.auth;
     //Guardamos el id del usuario del que quiere modificar los datos
-    const modUser = req.params.userId;
+    const modUser = req.params.id;
     //Comprobamos que los 2 ids coinciden, si no es asi lanza un error
     if (authUserId !== modUser) {
       throw genError("No tienes permisos para editar este usuario", 403);
