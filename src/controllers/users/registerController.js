@@ -20,6 +20,8 @@ const register = async (req, res, next) => {
     // Obtenemos los parámetros necesarios para el registro del body de la petición
     const { name, lastName, email, password } = req.body;
 
+    console.log("Parámetros: " + name + lastName + email + password);
+
     // Verificar si se cargó un archivo
     let photoPath = null;
     if (req.files && req.files.avatar) {

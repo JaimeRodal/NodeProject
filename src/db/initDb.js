@@ -104,3 +104,18 @@ const create = async () => {
 
 //Aquí ejecutamos la función para crear la base de datos con las tablas
 create();
+
+// Propuesta: insertar datos por defecto en la tabla categorías para poder insertar experiencias desde el principio.
+// Si hacemos la gestión de las mismas en el frontend, ahí ya el usuario puede cambiar los nombres, borrar o insertar
+/* INSERT INTO categories (name) VALUES
+  ('Adventure'),
+  ('Nature'),
+  ('Travel'),
+  ('Food'),
+  ('Technology'),
+  ('History'),
+  ('Art'),
+  ('Science'),
+  ('Music'),
+  ('Sports');
+  */
