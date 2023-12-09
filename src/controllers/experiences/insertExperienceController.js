@@ -5,15 +5,15 @@ import insertExperience from "../../models/insertExperience.js";
 const pool = await getPool();
 
 const insertExperienceController = async (req, res) => {
-  const { title, subtitle, place, text, photo } = req.body;
-  const { loggedUserId } = req.params;
+  const { title, subtitle, place, text, photo, category_id } = req.body;
 
-  const id = 1;
-  const category_id = 1;
+  // if (req.query.help) {
+  //   res.send("ayuda");
+  // } else {
+  // Recuperamos el id del usuario logueado para insertar la experiencia vinculada a él
+  const loggedUserId = req.auth;
 
-  // console.log(title + subtitle + place + text);
   await insertExperience({
-    id,
     title,
     subtitle,
     place,
@@ -22,6 +22,7 @@ const insertExperienceController = async (req, res) => {
     loggedUserId,
     category_id,
   });
+  // }
 };
 
 export default insertExperienceController;
