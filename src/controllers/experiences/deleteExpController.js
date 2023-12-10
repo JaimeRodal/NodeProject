@@ -1,12 +1,16 @@
 import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
 
+// Definimos el gestor de conexiones a la DB
 const pool = await getPool();
 
+// Creamos una función para borrar una experiencia tuya, previamente autorizado con TOKEN y en ella comprobamos si eres el dueño de la experiencia antes de poder borrarla
 const deleteExpController = async (req, res, next) => {
   try {
+    // Guardamos en una variable la id extraida de los parámetros de la request
     const { id } = req.params;
 
+    // Guardamos en una variable la búsqueda del usuario que coincida con la id anteriormente proporcionada
     const [[getExp]] = await pool.query(
       `
         SELECT exp.title,exp.subTitle,exp.place,exp.text, exp.photo, cat.name, exp.user_id FROM experiences exp, categories cat WHERE exp.id = ?
@@ -14,6 +18,7 @@ const deleteExpController = async (req, res, next) => {
       [id]
     );
 
+    // En caso de no existir la experiencia, generamos mensaje de error
     if (!getExp) {
       throw genError(
         "No puedes borrar la experiencia de otro usuario o no existe",
@@ -21,10 +26,12 @@ const deleteExpController = async (req, res, next) => {
       );
     }
 
+    // En caso de no coincidir la id del token de autorización y la id del usuario que creó la experiencia, generamos mensaje de error
     if (req.auth !== getExp.user_id) {
       throw genError("No puedes borrar la experiencia de otro usuario", 401);
     }
 
+    // En caso de lo anteriormente comprobado estar correcto, borramos la experiencia
     await pool.query(
       `
       DELETE FROM experiences WHERE id = ?
