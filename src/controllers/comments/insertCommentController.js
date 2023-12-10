@@ -1,9 +1,10 @@
 import insertComment from "../../models/insertComments.js";
 import Auth from "../../middlewares/auth.js";
-import genError from "../../utils/helpers";
+import genError from "../../utils/helpers.js";
 
 const insertCommentController = async (req, res, next) => {
   try {
+    console.log("Insert Comment Controller reached");
     const { text } = req.body;
     const exp_id = req.params.id;
     const user_id = req.auth;

@@ -5,6 +5,7 @@ import { TOKEN_SECRET } from "../../env.js";
 // Creamos una función para verificar la autentificación del usuario
 const Auth = (req, res, next) => {
   try {
+    console.log("Auth middleware alcanzado");
     // Requerimos la autorización del que envía la peticióm (token)
     const { authorization } = req.headers;
 
