@@ -5,9 +5,11 @@ import {
   getExpById,
   deleteExpController,
   helpExperienceController,
+} from "../controllers/experiences/index.js";
+import {
   votesController,
   votesOrderController,
-} from "../controllers/experiences/index.js";
+} from "../controllers/votes/index.js";
 
 const router = express.Router();
 
