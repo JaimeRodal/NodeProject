@@ -1,28 +1,55 @@
-import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
 import insertExperience from "../../models/insertExperience.js";
+import fileUpload from "express-fileupload";
+import express from "express";
 
-const pool = await getPool();
+const app = express();
+
+// Middleware para poder subir archivos
+app.use(
+  fileUpload({
+    createParentPath: true,
+  })
+);
 
 const insertExperienceController = async (req, res) => {
-  const { title, subtitle, place, text, photo, category_id } = req.body;
+  try {
+    const { title, subtitle, place, text, photo, category } = req.body;
+    console.log(req.body);
 
-  // if (req.query.help) {
-  //   res.send("ayuda");
-  // } else {
-  // Recuperamos el id del usuario logueado para insertar la experiencia vinculada a él
-  const loggedUserId = req.auth;
+    const loggedUserId = req.auth;
 
-  await insertExperience({
-    title,
-    subtitle,
-    place,
-    text,
-    photo,
-    loggedUserId,
-    category_id,
-  });
-  // }
+    // Verificar si se cargó un archivo
+    let photoPath = null;
+    if (req.files && req.files.avatar) {
+      // Obtener el archivo de la solicitud
+      const avatar = req.files.avatar;
+
+      // Guardar la imagen en la carpeta "uploads"
+      const nombreArchivoFinal = Date.now() + "-" + avatar.name;
+      avatar.mv(`./uploads/${nombreArchivoFinal}`);
+
+      // Establecer la ruta de la foto en caso de que se haya subido
+      photoPath = `../../uploads/${nombreArchivoFinal}`;
+    }
+
+    await insertExperience({
+      title,
+      subtitle,
+      place,
+      text,
+      photoPath,
+      loggedUserId,
+      category,
+    });
+
+    res.status(200).json({
+      message: "Experiencia insertada con éxito!",
+    });
+    // }
+  } catch (error) {
+    next(error);
+  }
 };
 
 export default insertExperienceController;

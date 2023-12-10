@@ -93,7 +93,20 @@ const create = async () => {
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
         `);
-
+    console.log("Insertando valores iniciales a categorías...");
+    await pool.query(`
+        INSERT INTO categories (name) VALUES
+  ('Adventure'),
+  ('Nature'),
+  ('Travel'),
+  ('Food'),
+  ('Technology'),
+  ('History'),
+  ('Art'),
+  ('Science'),
+  ('Music'),
+  ('Sports');
+        `);
     await pool.end();
   } catch (error) {
     console.log(error);
@@ -107,15 +120,5 @@ create();
 
 // Propuesta: insertar datos por defecto en la tabla categorías para poder insertar experiencias desde el principio.
 // Si hacemos la gestión de las mismas en el frontend, ahí ya el usuario puede cambiar los nombres, borrar o insertar
-/* INSERT INTO categories (name) VALUES
-  ('Adventure'),
-  ('Nature'),
-  ('Travel'),
-  ('Food'),
-  ('Technology'),
-  ('History'),
-  ('Art'),
-  ('Science'),
-  ('Music'),
-  ('Sports');
-  */
+/*
+ */
