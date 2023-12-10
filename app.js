@@ -7,7 +7,7 @@ import {
   errorController,
 } from "./src/controllers/errors/index.js";
 import userRoutes from "./src/routes/index.js";
-import { insertExperience } from "./src/models/index.js";
+
 // Usamos express
 const app = express();
 

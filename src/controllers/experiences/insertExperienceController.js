@@ -1,7 +1,7 @@
-import genError from "../../utils/helpers.js";
 import insertExperience from "../../models/insertExperience.js";
 import fileUpload from "express-fileupload";
 import express from "express";
+import genError from "../../utils/helpers.js";
 
 const app = express();
 
@@ -12,26 +12,22 @@ app.use(
   })
 );
 
-const insertExperienceController = async (req, res) => {
+const insertExperienceController = async (req, res, next) => {
   try {
-    const { title, subtitle, place, text, photo, category } = req.body;
-    console.log(req.body);
-
+    const { title, subtitle, place, text, category } = req.body;
     const loggedUserId = req.auth;
 
-    // Verificar si se cargó un archivo
-    let photoPath = null;
-    if (req.files && req.files.avatar) {
-      // Obtener el archivo de la solicitud
-      const avatar = req.files.avatar;
-
-      // Guardar la imagen en la carpeta "uploads"
-      const nombreArchivoFinal = Date.now() + "-" + avatar.name;
-      avatar.mv(`./uploads/${nombreArchivoFinal}`);
-
-      // Establecer la ruta de la foto en caso de que se haya subido
-      photoPath = `../../uploads/${nombreArchivoFinal}`;
+    // Hacemos que sea obligatorio subir una foto de tu experiencia
+    if (!req.files || !req.files.photo) {
+      throw genError("Es obligatorio subir una foto", 400);
     }
+
+    // Obtener la foto
+    const experiencePhoto = req.files.photo;
+    const photoPath = `../../uploads/experiencePhotos/${Date.now()}-${
+      experiencePhoto.name
+    }`;
+    experiencePhoto.mv(photoPath);
 
     await insertExperience({
       title,
@@ -46,7 +42,6 @@ const insertExperienceController = async (req, res) => {
     res.status(200).json({
       message: "Experiencia insertada con éxito!",
     });
-    // }
   } catch (error) {
     next(error);
   }

@@ -3,7 +3,6 @@ import fileUpload from "express-fileupload";
 import getPool from "../../db/getPool.js";
 import bcrypt from "bcrypt";
 import genError from "../../utils/helpers.js";
-import Auth from "../../middlewares/auth.js";
 
 const modifyApp = express();
 const pool = await getPool();

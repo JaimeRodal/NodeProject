@@ -1,5 +1,4 @@
 import insertComment from "../../models/insertComments.js";
-import Auth from "../../middlewares/auth.js";
 import genError from "../../utils/helpers.js";
 
 const insertCommentController = async (req, res, next) => {

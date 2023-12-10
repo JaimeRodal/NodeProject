@@ -1,5 +1,4 @@
 import getPool from "../db/getPool.js";
-import mysql from "mysql2";
 
 const pool = await getPool();
 
@@ -8,40 +7,39 @@ const insertExperience = async ({
   subtitle,
   place,
   text,
-  photo,
+  photoPath,
   loggedUserId,
-  category_id,
+  category,
 }) => {
   try {
     const sqlQuery = `
-  INSERT INTO experiences (
-    title,
-    subtitle,
-    place,
-    text,
-    photo,
-    user_id,
-    category_id
-  ) VALUES (?,?,?,?,?,?,?)
-`;
+      INSERT INTO experiences (
+        title,
+        subtitle,
+        place,
+        text,
+        photo,
+        user_id,
+        category_id
+      ) VALUES (?,?,?,?,?,?,?)
+    `;
 
     const sqlValues = [
       title,
       subtitle,
       place,
       text,
-      photo,
+      photoPath,
       loggedUserId,
-      category_id,
+      category,
     ];
-    console.log(sqlValues);
 
-    console.log("Query: " + mysql.format(sqlQuery, sqlValues));
     const [{ insertId }] = await pool.query(sqlQuery, sqlValues);
+
     return insertId;
   } catch (error) {
-    // throw new Error("Error inserting experience: " + error);
-    console.error("Error inserting experience: " + error);
+    console.error("Error insertando la experiencia: " + error);
+    throw error;
   }
 };
 
