@@ -13,24 +13,28 @@ app.use(
 );
 
 const insertExperienceController = async (req, res, next) => {
-  let photoPath;
   try {
     const { title, subTitle, place, text, category } = req.body;
     const loggedUserId = req.auth;
 
-    // Verificar si se cargó un archivo
-    console.log(req.body);
-    if (req.files && req.files.avatar) {
-      // Obtener el archivo de la solicitud
-      const avatar = req.files.avatar;
-
-      // Guardar la imagen en la carpeta "uploads"
-      const nombreArchivoFinal = Date.now() + "-" + avatar.name;
-      avatar.mv(`../../uploads/${nombreArchivoFinal}`);
-
-      // Establecer la ruta de la foto en caso de que se haya subido
-      photoPath = `../../uploads/${nombreArchivoFinal}`;
+    // Verificar si se cargó una imagen
+    if (!req.files || !req.files.avatar) {
+      throw {
+        httpStatus: 400,
+        message: "Es obligatorio subir una foto",
+      };
     }
+
+    // Obtener la imagen
+    const avatar = req.files.avatar;
+
+    // Guardar la imagen en la carpeta "uploads"
+    const nombreArchivoFinal = Date.now() + "-" + avatar.name;
+    avatar.mv(`../../uploads/${nombreArchivoFinal}`);
+
+    // Establecer la ruta de la foto en caso de que se haya subido
+    const photoPath = `../../uploads/${nombreArchivoFinal}`;
+
     await insertExperience({
       title,
       subTitle,
@@ -48,7 +52,7 @@ const insertExperienceController = async (req, res, next) => {
     const statusCode = error.httpStatus || 500;
     res.status(statusCode).json({
       status: "error",
-      message: error.message || "Error del servidor ",
+      message: error.message || "Error del servidor",
     });
   }
 };
