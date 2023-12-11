@@ -7,6 +7,7 @@ import {
   errorController,
 } from "./src/controllers/errors/index.js";
 import userRoutes from "./src/routes/index.js";
+import fileUpload from "express-fileupload";
 
 // Usamos express
 const app = express();
@@ -14,8 +15,12 @@ const app = express();
 // Hacemos que express interprete los JSON
 app.use(express.json());
 
-//urlencoded
-app.use(express.urlencoded({ extended: true }));
+// Usamos express-fileupload para subir archivos
+app.use(
+  fileUpload({
+    createParentPath: true,
+  })
+);
 
 // Usamos morgan para recibir en consola las peticiones hechas
 app.use(morgan("dev"));

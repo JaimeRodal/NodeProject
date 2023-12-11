@@ -17,6 +17,7 @@ const insertExperienceController = async (req, res, next) => {
     const { title, subTitle, place, text, category } = req.body;
     const loggedUserId = req.auth;
 
+    console.log(req.body);
     // Verificar si se cargó una imagen
     if (!req.files || !req.files.avatar) {
       throw {
