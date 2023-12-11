@@ -13,7 +13,7 @@ import {
 
 const router = express.Router();
 
-router.get("/experience", helpExperienceController);
+router.get("/experienceHTML", helpExperienceController);
 router.post("/experience", Auth, insertExperienceController);
 router.get("/experience/:id", getExpById);
 router.delete("/deleteExp/:id", Auth, deleteExpController);

@@ -1,5 +1,5 @@
 import getPool from "../db/getPool.js";
-
+import genError from "../utils/helpers.js";
 const pool = await getPool();
 
 const insertExperience = async ({
@@ -39,7 +39,7 @@ const insertExperience = async ({
     return insertId;
   } catch (error) {
     console.error("Error insertando la experiencia: " + error);
-    throw error;
+    throw genError("Error insertando la experiencia", 400);
   }
 };
 
