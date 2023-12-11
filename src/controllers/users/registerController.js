@@ -1,12 +1,11 @@
 import express from "express";
 import fileUpload from "express-fileupload";
-import getPool from "../../db/getPool.js";
 import bcrypt from "bcrypt";
 import sendMailUtil from "../../utils/sendMail.js";
 import genError from "../../utils/helpers.js";
+import { insertUser, emailExist } from "../../models/users/registerUser.js";
 
 const app = express();
-const pool = await getPool();
 
 // Middleware para poder subir archivos
 app.use(
@@ -33,12 +32,8 @@ const register = async (req, res, next) => {
       // Establecer la ruta de la foto en caso de que se haya subido
       photoPath = `../../uploads/${nombreArchivoFinal}`;
     }
-
     // Verificar si el email ya está en uso
-    const [[emailExists]] = await pool.query(
-      `SELECT * FROM users WHERE email=?`,
-      [email]
-    );
+    const emailExists = await emailExist(email);
 
     // De existir un usuario con el mismo email, generar un error con mensaje
     if (emailExists) {
@@ -49,10 +44,7 @@ const register = async (req, res, next) => {
     const hashedPass = await bcrypt.hash(password, 5);
 
     // Insertar el nuevo usuario en la base de datos con la ruta de la imagen de perfil
-    await pool.query(
-      `INSERT INTO users (name, lastName, email, password, photo) VALUES (?, ?, ?, ?, ?)`,
-      [name, lastName, email, hashedPass, photoPath]
-    );
+    await insertUser({ name, lastName, email, hashedPass, photoPath });
 
     // Nodemailer para los que se registran
     const emailSubject = "Cuenta registrada";
