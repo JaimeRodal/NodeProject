@@ -14,6 +14,9 @@ const app = express();
 // Hacemos que express interprete los JSON
 app.use(express.json());
 
+//urlencoded
+app.use(express.urlencoded({ extended: true }));
+
 // Usamos morgan para recibir en consola las peticiones hechas
 app.use(morgan("dev"));
 

@@ -4,7 +4,7 @@ const pool = await getPool();
 
 const insertExperience = async ({
   title,
-  subtitle,
+  subTitle,
   place,
   text,
   photoPath,
@@ -15,7 +15,7 @@ const insertExperience = async ({
     const sqlQuery = `
       INSERT INTO experiences (
         title,
-        subtitle,
+        subTitle,
         place,
         text,
         photo,
@@ -26,7 +26,7 @@ const insertExperience = async ({
 
     const sqlValues = [
       title,
-      subtitle,
+      subTitle,
       place,
       text,
       photoPath,
@@ -39,7 +39,7 @@ const insertExperience = async ({
     return insertId;
   } catch (error) {
     console.error("Error insertando la experiencia: " + error);
-    throw genError("Error insertando la experiencia", 400);
+    throw genError("Error insertando la experiencia", 500);
   }
 };
 
