@@ -1,4 +1,4 @@
 import insertCommentController from "./insertCommentController.js";
-import asnwerCommentController from "./asnwerCommentController.js";
+import answerCommentController from "./answerCommentController.js";
 
-export { insertCommentController, asnwerCommentController };
+export { insertCommentController, answerCommentController };

@@ -1,5 +1,5 @@
 import express from "express";
-import Auth from "../middlewares/auth.js";
+import {Auth, validation} from "../middlewares/auth.js";
 import {
   insertExperienceController,
   getExpById,
@@ -10,11 +10,12 @@ import {
   votesController,
   votesOrderController,
 } from "../controllers/votes/index.js";
+import experienceSchema from "../controllers/schemas/experiences/insertExperience.js";
 
 const router = express.Router();
 
 router.get("/experienceHTML", helpExperienceController);
-router.post("/experience", Auth, insertExperienceController);
+router.post("/experience", validation(experienceSchema), Auth, insertExperienceController);
 router.get("/experience/:id", getExpById);
 router.delete("/deleteExp/:id", Auth, deleteExpController);
 router.post("/experience/:id/vote", Auth, votesController);
