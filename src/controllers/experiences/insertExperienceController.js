@@ -2,6 +2,7 @@ import genError from "../../utils/helpers.js";
 import insertExperience from "../../models/insertExperience.js";
 import fileUpload from "express-fileupload";
 import express from "express";
+import { nanoid } from "nanoid";
 
 const app = express();
 
@@ -28,9 +29,9 @@ const insertExperienceController = async (req, res, next) => {
 
     // Obtener la imagen
     const avatar = req.files.avatar;
-
+    const nombreAvatar = nanoid(15);
     // Guardar la imagen en la carpeta "uploads"
-    const nombreArchivoFinal = Date.now() + "-" + avatar.name;
+    const nombreArchivoFinal = Date.now() + "-" + nombreAvatar;
     avatar.mv(`../../uploads/${nombreArchivoFinal}`);
 
     // Establecer la ruta de la foto en caso de que se haya subido
