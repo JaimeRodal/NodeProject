@@ -1,6 +1,7 @@
 // Middleware de errores
 const errorController = (err, req, res, next) => {
-  res.status(err.httpStatus).send({
+  const statusCode = (err.httpStatus || 500)
+  res.status(statusCode).send({
     status: err.code,
     message: err.message,
   });

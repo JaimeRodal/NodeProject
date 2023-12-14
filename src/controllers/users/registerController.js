@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 import sendMailUtil from "../../utils/sendMail.js";
 import genError from "../../utils/helpers.js";
 import { insertUser, emailExist } from "../../models/users/registerUser.js";
-
 const app = express();
 
 // Middleware para poder subir archivos
@@ -16,6 +15,7 @@ app.use(
 
 const register = async (req, res, next) => {
   try {
+
     // Obtenemos los parámetros necesarios para el registro del body de la petición
     const { name, lastName, email, password } = req.body;
 

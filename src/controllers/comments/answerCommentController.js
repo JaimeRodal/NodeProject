@@ -1,7 +1,7 @@
 import insertAnswer from "../../models/comments/insertAnswer.js";
 import genError from "../../utils/helpers.js";
 
-const asnwerCommentController = async (req, res, next) => {
+const answerCommentController = async (req, res, next) => {
   try {
     const { text } = req.body;
     const user_id = req.auth;
@@ -22,4 +22,4 @@ const asnwerCommentController = async (req, res, next) => {
   }
 };
 
-export default asnwerCommentController;
+export default answerCommentController;
