@@ -1,5 +1,6 @@
 import express from "express";
-import {Auth, validation} from "../middlewares/auth.js";
+import Auth from "../middlewares/auth.js";
+import validation from "../middlewares/joiValidation.js";
 import {
   insertExperienceController,
   getExpById,
@@ -15,7 +16,12 @@ import experienceSchema from "../controllers/schemas/experiences/insertExperienc
 const router = express.Router();
 
 router.get("/experienceHTML", helpExperienceController);
-router.post("/experience", validation(experienceSchema), Auth, insertExperienceController);
+router.post(
+  "/experience",
+  validation(experienceSchema),
+  Auth,
+  insertExperienceController
+);
 router.get("/experience/:id", getExpById);
 router.delete("/deleteExp/:id", Auth, deleteExpController);
 router.post("/experience/:id/vote", Auth, votesController);

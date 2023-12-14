@@ -1,5 +1,6 @@
 import express from "express";
-import {Auth, validation} from "../middlewares/auth.js";
+import Auth from "../middlewares/auth.js";
+import validation from "../middlewares/joiValidation.js";
 import {
   insertCommentController,
   answerCommentController,
@@ -9,9 +10,15 @@ import answerSchema from "../controllers/schemas/comments/insertAnswer.js";
 
 const router = express.Router();
 
-router.post("/experience/:id/comment", validation(commentSchema), Auth, insertCommentController);
 router.post(
-  "/experience/:id/comment/:comment_id/answer", validation(answerSchema),
+  "/experience/:id/comment",
+  validation(commentSchema),
+  Auth,
+  insertCommentController
+);
+router.post(
+  "/experience/:id/comment/:comment_id/answer",
+  validation(answerSchema),
   Auth,
   answerCommentController
 );
