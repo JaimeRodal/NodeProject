@@ -9,6 +9,11 @@ const votesController = async (req, res, next) => {
     const { id } = req.params;
     const userAuth = req.auth;
 
+    // Comprobamos si el usuario está registrado
+    if (!userAuth) {
+      throw genError("No estás registrado", 401);
+    }
+
     //   Comprobamos si el voto existe pasándole los datos necesarios
     const [result] = await pool.query(
       `
@@ -16,11 +21,7 @@ const votesController = async (req, res, next) => {
   `,
       [userAuth, id]
     );
-    // En caso de haber algún error, lo mandamos
-    if (result.length === 0) {
-      throw genError("La experiencia no existe o no estás registrado", 401);
-    }
-
+    console.log(result);
     //   En caso de existir, borrarlo
     if (result.length > 0) {
       // Lo borramos de la tabla votes
