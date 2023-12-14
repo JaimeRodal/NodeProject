@@ -11,7 +11,7 @@ const answerCommentController = async (req, res, next) => {
       throw genError("Debes registrarte para comentar experiencias", 401);
     }
 
-    await insertAnswer({ text, comment_id, user_id });
+    await insertAnswer({ text, comment_id, id, user_id });
 
     res.status(201).json({
       status: "Correcto",

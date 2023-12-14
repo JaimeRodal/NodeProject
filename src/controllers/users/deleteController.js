@@ -29,7 +29,32 @@ const deleteController = async (req, res, next) => {
       throw genError("No puedes borrar el perfíl de otro usuario", 401);
     }
 
-    // Si la comprobación anterior es correcta, procedemos a borrar el usuario
+    // Si la comprobación anterior es correcta, procedemos a borrar el usuario, borrando antes todo su contenido
+
+    await pool.query(
+      `
+      DELETE FROM answerComments WHERE user_id = ?
+      `,
+      [id]
+    );
+
+    // Luego borramos los comentarios de la experiencia con ese ID
+
+    await pool.query(
+      `
+      DELETE FROM comments   WHERE user_id = ?
+      `,
+      [id]
+    );
+
+    // Por ultimo borramos la experiencia
+    await pool.query(
+      `
+      DELETE FROM experiences WHERE user_id = ?
+      `,
+      [id]
+    );
+
     await pool.query(
       `
     DELETE FROM users WHERE id = ?

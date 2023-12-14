@@ -3,11 +3,11 @@ import genError from "../../utils/helpers.js";
 
 const pool = await getPool();
 
-const insertAnswer = async ({ text, comment_id, user_id }) => {
+const insertAnswer = async ({ text, comment_id, id, user_id }) => {
   try {
-    const sqlQuery = `INSERT INTO answercomments (text, comment_id, user_id) VALUES (?,?,?)`;
+    const sqlQuery = `INSERT INTO answercomments (text, comment_id, exp_id, user_id) VALUES (?,?,?,?)`;
 
-    const sqlValues = [text, comment_id, user_id];
+    const sqlValues = [text, comment_id, id, user_id];
 
     const [{ insertId }] = await pool.query(sqlQuery, sqlValues);
 
