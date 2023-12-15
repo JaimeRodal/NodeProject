@@ -1,11 +1,15 @@
 import insertExperienceController from "./insertExperienceController.js";
-import getExpById from "./getExpById.js";
-import deleteExpController from "./deleteExpController.js";
+import getExperienceController from "./getExperienceController.js";
+import deleteExperienceController from "./deleteExperienceController.js";
 import helpExperienceController from "./helpExperienceController.js";
+import getExperiencesController from "./getExperiencesController.js";
+import voteExperienceController from "./voteExperienceController.js";
 
 export {
   insertExperienceController,
-  getExpById,
-  deleteExpController,
+  getExperienceController,
+  deleteExperienceController,
   helpExperienceController,
+  getExperiencesController,
+  voteExperienceController,
 };
