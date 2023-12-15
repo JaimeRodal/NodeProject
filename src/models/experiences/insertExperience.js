@@ -38,10 +38,12 @@ const insertExperience = async ({
       category,
     ];
 
-    const sql = sqlQuery.replace(/\?/g, (match) => `'${sqlValues.shift()}'`);
+    let sqlValues_temp = new Array(sqlValues);
+    const sql = sqlQuery.replace(
+      /\?/g,
+      (match) => `'${sqlValues_temp.shift()}'`
+    );
     console.log("Query: " + sql);
-
-    // const [{ insertId }] = await pool.query(sqlQuery, sqlValues);
 
     const [{ insertId }] = await pool.query(sqlQuery, sqlValues);
 
