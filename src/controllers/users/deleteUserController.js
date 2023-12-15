@@ -5,7 +5,7 @@ import genError from "../../utils/helpers.js";
 const pool = await getPool();
 
 // Creamos una función para borrar tu usuario, siendo previamente autorizado por el middleware de autorización
-const deleteController = async (req, res, next) => {
+const deleteUserController = async (req, res, next) => {
   try {
     // Obtenemos el id parámetro de la petición
     const { id } = req.params;
@@ -73,4 +73,4 @@ const deleteController = async (req, res, next) => {
 };
 
 // Exportamos la función
-export default deleteController;
+export default deleteUserController;
