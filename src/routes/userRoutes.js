@@ -9,6 +9,7 @@ import {
 import registerSchema from "../controllers/schemas/users/registerUser.js";
 import loginSchema from "../controllers/schemas/users/loginUser.js";
 import modifyUserSchema from "../controllers/schemas/users/modifyUser.js";
+import deleteUserSchema from "../controllers/schemas/users/deleteUser.js";
 
 //Enrutador de express
 const router = express.Router();
@@ -20,7 +21,7 @@ router.post("/login", validation(loginSchema), loginController);
 // router.put("/modify/:id", validation(modifyUserSchema), Auth, modifyController);
 // // NOTA: Aquí no debería ser patch?
 
-router.delete("/user/:id", Auth, deleteUserController);
+router.delete("/user/:id", validation(deleteUserSchema) , Auth, deleteUserController);
 router.put("/user/:id", validation(modifyUserSchema), Auth, modifyController);
 
 export default router;
