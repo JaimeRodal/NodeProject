@@ -20,13 +20,13 @@ const register = async (req, res, next) => {
 
     // Verificar si se cargó un archivo
     let photoPath = null;
-    if (req.files && req.files.avatar) {
+    if (req.files && req.files.photo) {
       // Obtener el archivo de la solicitud
-      const avatar = req.files.avatar;
+      const photo = req.files.photo;
 
       // Guardar la imagen en la carpeta "uploads"
-      const nombreArchivoFinal = Date.now() + "-" + avatar.name;
-      avatar.mv(`./uploads/${nombreArchivoFinal}`);
+      const nombreArchivoFinal = Date.now() + "-" + photo.name;
+      photo.mv(`./uploads/${nombreArchivoFinal}`);
 
       // Establecer la ruta de la foto en caso de que se haya subido
       photoPath = `../../uploads/${nombreArchivoFinal}`;
