@@ -3,7 +3,7 @@ import genError from "../../utils/helpers.js";
 
 const pool = await getPool();
 
-const getExperienceController = async (req, res, next) => {
+const getExpById = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -27,4 +27,4 @@ const getExperienceController = async (req, res, next) => {
   }
 };
 
-export default getExperienceController;
+export default getExpById;

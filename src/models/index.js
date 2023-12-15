@@ -1,3 +1,3 @@
-import insertExperience from "./experiences/insertExperience.js";
+import insertExperience from "./insertExperience.js";
 
 export { insertExperience };

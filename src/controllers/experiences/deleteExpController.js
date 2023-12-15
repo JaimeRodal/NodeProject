@@ -5,7 +5,7 @@ import genError from "../../utils/helpers.js";
 const pool = await getPool();
 
 // Creamos una función para borrar una experiencia tuya, previamente autorizado con TOKEN y en ella comprobamos si eres el dueño de la experiencia antes de poder borrarla
-const deleteExperienceController = async (req, res, next) => {
+const deleteExpController = async (req, res, next) => {
   try {
     // Guardamos en una variable la id extraida de los parámetros de la request
     const { id } = req.params;
@@ -65,4 +65,4 @@ const deleteExperienceController = async (req, res, next) => {
   }
 };
 
-export default deleteExperienceController;
+export default deleteExpController;

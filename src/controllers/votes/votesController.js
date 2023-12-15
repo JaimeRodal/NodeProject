@@ -3,7 +3,7 @@ import genError from "../../utils/helpers.js";
 
 const pool = await getPool();
 
-const voteExperienceController = async (req, res, next) => {
+const votesController = async (req, res, next) => {
   try {
     // Obtenemos lo parámetros necesarios
     const { id } = req.params;
@@ -69,4 +69,4 @@ const voteExperienceController = async (req, res, next) => {
   }
 };
 
-export default voteExperienceController;
+export default votesController;

@@ -6,10 +6,8 @@ const pool = await getPool();
 const insertUser = async ({ name, lastName, email, hashedPass, photoPath }) => {
   try {
     const sqlQuery = `INSERT INTO users (name, lastName, email, password, photo) VALUES (?, ?, ?, ?, ?)`;
+    
     const sqlValues = [name, lastName, email, hashedPass, photoPath];
-
-    const sql = sqlQuery.replace(/\?/g, (match) => `'${sqlValues.shift()}'`);
-    console.log("Query: " + sql);
 
     const [{ insertId }] = await pool.query(sqlQuery, sqlValues);
 
