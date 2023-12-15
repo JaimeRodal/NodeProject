@@ -6,6 +6,7 @@ import {
   getExpById,
   deleteExpController,
   helpExperienceController,
+  modifyExpController,
 } from "../controllers/experiences/index.js";
 import {
   votesController,
@@ -26,5 +27,6 @@ router.get("/experience/:id", getExpById);
 router.delete("/deleteExp/:id", Auth, deleteExpController);
 router.post("/experience/:id/vote", Auth, votesController);
 router.get("/experience/orderByVotes/:text", votesOrderController);
+router.put("/modExperience/:id", Auth, modifyExpController);
 
 export default router;
