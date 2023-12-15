@@ -33,6 +33,13 @@ const deleteUserController = async (req, res, next) => {
 
     await pool.query(
       `
+      DELETE FROM votes WHERE user_id = ?
+      `,
+      [id]
+    );
+
+    await pool.query(
+      `
       DELETE FROM answerComments WHERE user_id = ?
       `,
       [id]

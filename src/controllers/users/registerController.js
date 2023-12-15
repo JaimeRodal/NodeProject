@@ -26,10 +26,10 @@ const register = async (req, res, next) => {
 
       // Guardar la imagen en la carpeta "uploads"
       const nombreArchivoFinal = Date.now() + "-" + photo.name;
-      photo.mv(`./uploads/${nombreArchivoFinal}`);
+      photo.mv(`./uploads/users/${nombreArchivoFinal}`);
 
       // Establecer la ruta de la foto en caso de que se haya subido
-      photoPath = `../../uploads/${nombreArchivoFinal}`;
+      photoPath = `../../uploads/users/${nombreArchivoFinal}`;
     }
     // Verificar si el email ya está en uso
     const emailExists = await emailExist(email);

@@ -79,7 +79,7 @@ const modifyExpController = async (req, res, next) => {
     await pool.query(updateQuery, values);
 
     res.status(200).json({
-      message: "Usuario modificado con éxito!",
+      message: "Experiencia modificada con éxito!",
     });
   } catch (error) {
     next(error);

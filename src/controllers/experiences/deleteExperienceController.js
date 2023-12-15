@@ -31,6 +31,14 @@ const deleteExperienceController = async (req, res, next) => {
       throw genError("No puedes borrar la experiencia de otro usuario", 401);
     }
     // En caso de lo anteriormente comprobado estar correcto, borramos primero las respuestas que esten dentro de la experiencia y dentro de los comentarios con ese ID (borrar en cascada por los FK)
+
+    await pool.query(
+      `
+      DELETE FROM votes WHERE exp_id = ?
+      `,
+      [id]
+    );
+
     await pool.query(
       `
       DELETE FROM answerComments WHERE exp_id = ?

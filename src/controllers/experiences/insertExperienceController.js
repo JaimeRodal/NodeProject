@@ -27,10 +27,10 @@ const insertExperienceController = async (req, res, next) => {
 
     // Guardar la imagen en la carpeta "uploads"
     const nombreArchivoFinal = Date.now() + "-" + photo.name;
-    photo.mv(`../../uploads/${nombreArchivoFinal}`);
+    photo.mv(`./uploads/experiences/${nombreArchivoFinal}`);
 
     // Establecer la ruta de la foto en caso de que se haya subido
-    const photoPath = `../../uploads/${nombreArchivoFinal}`;
+    const photoPath = `../../uploads/experiences/${nombreArchivoFinal}`;
 
     await insertExperience({
       title,

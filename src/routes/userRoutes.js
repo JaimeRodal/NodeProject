@@ -21,7 +21,12 @@ router.post("/login", validation(loginSchema), loginController);
 // router.put("/modify/:id", validation(modifyUserSchema), Auth, modifyController);
 // // NOTA: Aquí no debería ser patch?
 
-router.delete("/user/:id", validation(deleteUserSchema) , Auth, deleteUserController);
+router.delete(
+  "/user/:id",
+  validation(deleteUserSchema),
+  Auth,
+  deleteUserController
+);
 router.put("/user/:id", validation(modifyUserSchema), Auth, modifyController);
 
 export default router;
