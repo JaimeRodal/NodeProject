@@ -1,5 +1,5 @@
 import genError from "../../utils/helpers.js";
-import { insertExperience } from "../../models/index.js";
+import { insertExperience } from "../../models/experiences/index.js";
 import fileUpload from "express-fileupload";
 import express from "express";
 

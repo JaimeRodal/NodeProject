@@ -1,5 +1,5 @@
-import getPool from "../db/getPool.js";
-import genError from "../utils/helpers.js";
+import getPool from "../../db/getPool.js";
+import genError from "../../utils/helpers.js";
 const pool = await getPool();
 
 const insertExperience = async ({
