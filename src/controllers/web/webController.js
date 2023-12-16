@@ -9,6 +9,7 @@ const webController = async (req, res) => {
     SELECT exp.title,exp.subTitle,exp.place,exp.text, exp.photo, cat.name FROM experiences exp, categories cat WHERE exp.category_id = cat.id ORDER BY exp.createdAt DESC
     `);
 
+  // Respuesta
   res.send({
     status: "Correcto",
     data: exp,

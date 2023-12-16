@@ -1,13 +1,13 @@
+// Importaciones
 import express from "express";
 import Auth from "../middlewares/auth.js";
-import {
-  votesController,
-  votesOrderController,
-} from "../controllers/votes/index.js";
+import { votesController } from "../controllers/votes/index.js";
 
+// Creamos el enrutador
 const router = express.Router();
 
+// RUTAS
 router.post("/experience/:id/vote", Auth, votesController);
-router.get("/experience/orderByVotes/:text", votesOrderController);
 
+// Exportaciones
 export default router;

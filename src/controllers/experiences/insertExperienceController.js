@@ -1,8 +1,10 @@
+// Importaciones
 import genError from "../../utils/helpers.js";
 import { insertExperience } from "../../models/experiences/index.js";
 import fileUpload from "express-fileupload";
 import express from "express";
 
+// Definimos express en una variable para su uso
 const app = express();
 
 // Middleware para poder subir archivos
@@ -12,9 +14,12 @@ app.use(
   })
 );
 
+// Creamos una función para manejar la inserción de experiencias
 const insertExperienceController = async (req, res, next) => {
   try {
+    // Obtenemos los parámetros necesarios para realizar la inserción de una experiencia
     const { title, subTitle, place, text, category } = req.body;
+    // Obtenemos la "id" del usuario loggeado
     const loggedUserId = req.auth;
 
     // Verificar si se cargó una imagen
@@ -32,6 +37,7 @@ const insertExperienceController = async (req, res, next) => {
     // Establecer la ruta de la foto en caso de que se haya subido
     const photoPath = `../../uploads/experiences/${nombreArchivoFinal}`;
 
+    // Llamamos a la función encargada de insertar los datos de la experiencia(Ver explicación en su respectivo lugar)
     await insertExperience({
       title,
       subTitle,
@@ -42,6 +48,7 @@ const insertExperienceController = async (req, res, next) => {
       category,
     });
 
+    // Respuesta
     res.status(200).json({
       message: "Experiencia insertada con éxito!",
     });
@@ -54,4 +61,5 @@ const insertExperienceController = async (req, res, next) => {
   }
 };
 
+// Exportaciones
 export default insertExperienceController;

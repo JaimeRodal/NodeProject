@@ -1,3 +1,4 @@
+// Importaciones
 import Joi from "joi";
 
 // Crear el esquema para verificar el id de una experiencia concreta como un objeto Joi

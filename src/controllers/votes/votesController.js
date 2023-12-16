@@ -1,8 +1,10 @@
+// Importaciones
 import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
 
+// Guardamos en una variable el gestor de conexiones a la DB
 const pool = await getPool();
-
+// Creamos una función para manejar los votos de las experiencias
 const votesController = async (req, res, next) => {
   try {
     // Obtenemos lo parámetros necesarios

@@ -1,3 +1,4 @@
+// Importaciones
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import getPool from "../../db/getPool.js";
@@ -51,6 +52,7 @@ const login = async (req, res, next) => {
       token,
     });
   } catch (error) {
+    // En caso de error pasamos el error al middleware de gestión de errores
     next(error);
   }
 };

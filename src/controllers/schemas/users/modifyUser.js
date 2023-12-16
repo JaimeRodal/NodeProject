@@ -1,8 +1,8 @@
+// Importaciones
 import Joi from "joi";
 
 // Crear el esquema para la modificación del usuario como un objeto Joi
 const modifyUserSchema = Joi.object({
-
   // Definimos los parámetros que se validarán con las caracteríscticas que requiramos
   name: Joi.string()
     .pattern(/^[a-zA-ZÀ-ÖØ-öø-ÿç\s'-]+$/u)

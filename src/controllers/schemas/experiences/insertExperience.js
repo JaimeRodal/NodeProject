@@ -1,3 +1,4 @@
+// Importaciones
 import Joi from "joi";
 
 // Crear el esquema para insertar una experiencia como un objeto Joi

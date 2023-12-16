@@ -1,3 +1,4 @@
+// Importaciones
 import express from "express";
 import Auth from "../middlewares/auth.js";
 import validation from "../middlewares/joiValidation.js";
@@ -8,8 +9,10 @@ import {
 import commentSchema from "../controllers/schemas/comments/insertComment.js";
 import answerSchema from "../controllers/schemas/comments/insertAnswer.js";
 
+// Guardamos en una variable el gestor de rutas
 const router = express.Router();
 
+// RUTAS
 router.post(
   "/experience/:id/comment",
   validation(commentSchema),
@@ -23,4 +26,5 @@ router.post(
   answerCommentController
 );
 
+// Exportaciones
 export default router;

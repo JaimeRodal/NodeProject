@@ -1,3 +1,4 @@
+// Importaciones
 import Joi from "joi";
 
 // Crear el esquema para insertar el comentario como un objeto Joi

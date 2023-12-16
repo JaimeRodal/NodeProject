@@ -17,10 +17,6 @@ const router = express.Router();
 // Creamos las distintas rutas con sus métodos
 router.post("/register", validation(registerSchema), registerController);
 router.post("/login", validation(loginSchema), loginController);
-// router.delete("/delete/:id", Auth, deleteController);
-// router.put("/modify/:id", validation(modifyUserSchema), Auth, modifyController);
-// // NOTA: Aquí no debería ser patch?
-
 router.delete(
   "/user/:id",
   validation(deleteUserSchema),
@@ -29,4 +25,5 @@ router.delete(
 );
 router.put("/user/:id", validation(modifyUserSchema), Auth, modifyController);
 
+// Exportaciones
 export default router;

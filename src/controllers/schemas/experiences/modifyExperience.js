@@ -1,3 +1,4 @@
+// Importaciones
 import Joi from "joi";
 
 // Crear el esquema para insertar una experiencia como un objeto Joi
@@ -32,7 +33,6 @@ const experienceSchema = Joi.object({
   photoPath: [Joi.string()],
 
   category: Joi.number().integer().positive().required(),
-
 });
 // Exportamos el Schema
 export default experienceSchema;

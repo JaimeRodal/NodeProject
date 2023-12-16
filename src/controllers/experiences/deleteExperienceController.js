@@ -1,3 +1,4 @@
+// Importaciones
 import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
 
@@ -30,8 +31,9 @@ const deleteExperienceController = async (req, res, next) => {
     if (req.auth !== getExp.user_id) {
       throw genError("No puedes borrar la experiencia de otro usuario", 401);
     }
-    // En caso de lo anteriormente comprobado estar correcto, borramos primero las respuestas que esten dentro de la experiencia y dentro de los comentarios con ese ID (borrar en cascada por los FK)
+    // En caso de lo anteriormente comprobado estar correcto, borramos primero las respuestas que esten dentro de la experiencia y dentro de los comentarios con ese ID, además de los votos registrados (borrar en cascada por los FK)
 
+    // Votos
     await pool.query(
       `
       DELETE FROM votes WHERE exp_id = ?
@@ -39,6 +41,7 @@ const deleteExperienceController = async (req, res, next) => {
       [id]
     );
 
+    // Respuestas de comentarios
     await pool.query(
       `
       DELETE FROM answerComments WHERE exp_id = ?
@@ -69,6 +72,7 @@ const deleteExperienceController = async (req, res, next) => {
       message: `Experiencia con id ${id} borrada con éxito!`,
     });
   } catch (error) {
+    // En caso de error pasamos el error al middleware de gestión de errores
     next(error);
   }
 };

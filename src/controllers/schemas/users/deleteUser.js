@@ -1,3 +1,4 @@
+// Importaciones
 import Joi from "joi";
 
 // Crear el esquema para eliminar usuarios como un objeto Joi
