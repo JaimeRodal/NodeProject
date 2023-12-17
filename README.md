@@ -12,14 +12,14 @@ Para ver la documentación completa del proyecto puedes entrar en estos enlaces:
   - Manual Técnico: https://docs.google.com/document/d/1Q-SztmidkxyG1-jWN2Asz34hqvUGgpP3ZO7rCd0j6rE/edit?usp=drive_link
 
 ## Endpoints 
-> .[!NOTE]
-> Todos los Endpoints y su funcionamiento están recogidos dentro de la documentación ""Maunal de Usuario"
+> .[!NOTE].
+> Todos los Endpoints y su funcionamiento están recogidos dentro de la documentación "Maunal de Usuario"
 
 ## Autenticación
 
 Los usuarios se autentican con un token "Bearer", y este se obtiene al hacer "Login" con un usuario previamente registrado, y utilizarlo en la aplicación que uses para hacer las pruebas, ya sea Postman, Thunder Client o cualquier otra.
 
-> .[!NOTE]
+> .[!WARNING].
 > Recuerada que el token obtenido debes guardarlo como "Bearer Token"
 
 ## Contribución

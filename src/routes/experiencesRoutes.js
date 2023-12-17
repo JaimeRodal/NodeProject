@@ -37,13 +37,6 @@ router.delete(
   deleteExperienceController
 );
 
-// Endpoint de voto de experiencia
-router.post(
-  "/experience/:id/vote",
-  validation(idExperienceSchema),
-  Auth
-);
-
 // Endpoint de listado de experiencias: búsqueda y listado por votos
 router.get(
   "/experiences",
