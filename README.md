@@ -1,7 +1,7 @@
 # Experiences API
 ## Descripción de la API
 
-Estas API conreola el funcionamiento de de un portal donde usuarios pueden publicar sus recomendaciones sobre viajes, sitios o experiencias por el mundo.
+Estas API controla el funcionamiento de un portal donde usuarios pueden publicar sus recomendaciones sobre viajes, sitios o experiencias por el mundo.
 
 ## Documentación
 
@@ -12,8 +12,9 @@ Para ver la documentación completa del proyecto puedes entrar en estos enlaces:
   - Manual Técnico: https://docs.google.com/document/d/1Q-SztmidkxyG1-jWN2Asz34hqvUGgpP3ZO7rCd0j6rE/edit?usp=drive_link
 
 ## Endpoints 
+
 > .[!NOTE].
-> Todos los Endpoints y su funcionamiento están recogidos dentro de la documentación "Maunal de Usuario"
+> Todos los Endpoints y su funcionamiento están recogidos dentro de la documentación "Manual de Usuario"
 
 ## Autenticación
 
@@ -28,5 +29,5 @@ En caso de encontrar algún tipo de error tanto en la documentación como en el 
 
 ## Licencia
 
-Todas las licencias de este proyecto están reservadas a HJDC. No está permitido el uso con fines comerciales de esta API suin autorización del titular, y en caso de ser utilizado, ya sea con o sin autorización, la API de proporciona sin garantías de ningún tipo y el titular de la API no acepta ningún tipo de responsabilidad sobre cualquier problema relacionado con la misma.
+Todas las licencias de este proyecto están reservadas a HJDC. No está permitido el uso con fines comerciales de esta API sin autorización del titular, y en caso de ser utilizada, la API se proporciona sin garantías de ningún tipo y el titular de la API no acepta ningún tipo de responsabilidad sobre cualquier problema relacionado con la misma.
 
