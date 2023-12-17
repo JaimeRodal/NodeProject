@@ -7,9 +7,9 @@ Estas API controla el funcionamiento de un portal donde usuarios pueden publicar
 
 Para ver la documentación completa del proyecto puedes entrar en estos enlaces:
 
-  - Manual de Usuario: [a relative link](ExperiencesAPI-Manual_de_usuario.pdf)
+  - Manual de Usuario: [Experiences API  -Manual de usuario](ExperiencesAPI-Manual_de_usuario.pdf)
 
-  - Manual Técnico: https://docs.google.com/document/d/1Q-SztmidkxyG1-jWN2Asz34hqvUGgpP3ZO7rCd0j6rE/edit?usp=drive_link
+  - Manual Técnico: [Experiences API - Manual técnico](ExperiencesAPI-Manual_tecnico.pdf)
 
 ## Endpoints 
 
