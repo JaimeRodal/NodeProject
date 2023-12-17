@@ -8,7 +8,6 @@ import {
   deleteExperienceController,
   getExperiencesController,
   modifyExpController,
-  voteExperienceController,
 } from "../controllers/experiences/index.js";
 import experienceSchema from "../controllers/schemas/experiences/insertExperience.js";
 import idExperienceSchema from "../controllers/schemas/experiences/idExperience.js";
@@ -42,8 +41,7 @@ router.delete(
 router.post(
   "/experience/:id/vote",
   validation(idExperienceSchema),
-  Auth,
-  voteExperienceController
+  Auth
 );
 
 // Endpoint de listado de experiencias: búsqueda y listado por votos
