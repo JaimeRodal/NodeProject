@@ -4,6 +4,8 @@ import Joi from "joi";
 // Crear el esquema para insertar una experiencia como un objeto Joi
 const experienceSchema = Joi.object({
   // Definimos los parámetros que se validarán con las caracteríscticas que requiramos
+  id: Joi.number().integer().positive().required(),
+
   title: Joi.string()
     .pattern(/^[a-zA-Z0-9À-ÖØ-öø-ÿç\s'-]+$/u)
     .min(3)
@@ -31,8 +33,6 @@ const experienceSchema = Joi.object({
   photoPath: [Joi.string()],
 
   category: Joi.number().integer().positive().required(),
-
-  // Mirar qué datos son required y cuales no
 });
 // Exportamos el Schema
 export default experienceSchema;

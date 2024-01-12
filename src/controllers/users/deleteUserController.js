@@ -1,3 +1,4 @@
+// Importaciones
 import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
 
@@ -30,6 +31,13 @@ const deleteUserController = async (req, res, next) => {
     }
 
     // Si la comprobación anterior es correcta, procedemos a borrar el usuario, borrando antes todo su contenido
+
+    await pool.query(
+      `
+      DELETE FROM votes WHERE user_id = ?
+      `,
+      [id]
+    );
 
     await pool.query(
       `
@@ -68,6 +76,7 @@ const deleteUserController = async (req, res, next) => {
       message: `Usuario con id ${id} borrado con éxito!`,
     });
   } catch (error) {
+    // En caso de error pasamos el error al middleware de gestión de errores
     next(error);
   }
 };

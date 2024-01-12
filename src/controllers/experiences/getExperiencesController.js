@@ -1,3 +1,4 @@
+// Importaciones
 import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
 
@@ -34,7 +35,6 @@ const getExperiencesController = async (req, res, next) => {
       });
     } else if (list === "votes") {
       let order = req.query.order;
-      // order = order.toString();
 
       // Comprobamos que el parámetro pasado coincida con alguna de las dos necesarias para realizar la acción correctamente, de no ser así, generamos un error
       if (order !== "DESC" && order !== "ASC") {
@@ -50,7 +50,6 @@ const getExperiencesController = async (req, res, next) => {
       GROUP BY exp.id, exp.title, exp.subTitle, exp.place, exp.text, exp.photo, cat.name
       ORDER BY vote_count ${order === "DESC" ? "DESC" : "ASC"}
     `;
-      console.log("Query: " + sqlQuery);
 
       // Realizamos la petición a la DB
       const [orderBy] = await pool.query(sqlQuery);
@@ -62,6 +61,7 @@ const getExperiencesController = async (req, res, next) => {
       });
     }
   } catch (error) {
+    // En caso de error pasamos el error al middleware de gestión de errores
     next(error);
   }
 };

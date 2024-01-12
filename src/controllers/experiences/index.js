@@ -1,15 +1,15 @@
+// Importaciones
 import insertExperienceController from "./insertExperienceController.js";
 import getExperienceController from "./getExperienceController.js";
 import deleteExperienceController from "./deleteExperienceController.js";
-import helpExperienceController from "./helpExperienceController.js";
 import getExperiencesController from "./getExperiencesController.js";
-import voteExperienceController from "./voteExperienceController.js";
+import modifyExpController from "./modExperienceController.js";
 
+// Exportaciones
 export {
   insertExperienceController,
   getExperienceController,
   deleteExperienceController,
-  helpExperienceController,
   getExperiencesController,
-  voteExperienceController,
+  modifyExpController,
 };

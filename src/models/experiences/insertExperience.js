@@ -1,7 +1,11 @@
+// Importaciones
 import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
+
+// Guardamos en una variable el gestor de conexiones a la DB
 const pool = await getPool();
 
+// Creamos una función para insertar una experiencia en la DB
 const insertExperience = async ({
   title,
   subTitle,
@@ -12,22 +16,20 @@ const insertExperience = async ({
   category,
 }) => {
   try {
-    const sqlQuery = `INSERT INTO experiences (title,
+    // Guardamos en una variable la query
+    const sqlQuery = `
+      INSERT INTO experiences (
+        title,
         subTitle,
         place,
         text,
         photo,
         user_id,
-        category_id) VALUES (?,?,?,?,?,?,?)`;
+        category_id
+      ) VALUES (?,?,?,?,?,?,?)
+    `;
 
-    const title = "Sample Title";
-    const subTitle = "Sample Subtitle";
-    const place = "Sample Place";
-    const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-    const photoPath = "gggggg";
-    const loggedUserId = "1";
-    const category = "3";
-
+    // Guardamos en una variable los parámetros que le pasaremos a la query
     const sqlValues = [
       title,
       subTitle,
@@ -38,6 +40,7 @@ const insertExperience = async ({
       category,
     ];
 
+<<<<<<< HEAD
     let sqlValues_temp = new Array(sqlValues);
     const sql = sqlQuery.replace(
       /\?/g,
@@ -45,13 +48,17 @@ const insertExperience = async ({
     );
     console.log("Query: " + sql);
 
+=======
+    // Realizamos la petición a la DB
+>>>>>>> main
     const [{ insertId }] = await pool.query(sqlQuery, sqlValues);
 
     return insertId;
   } catch (error) {
-    console.error("Error insertando la experiencia: " + error);
+    // En caso de haber algun error, lo manejamos
     throw genError("Error insertando la experiencia", 500);
   }
 };
 
+// Exportaciones
 export default insertExperience;

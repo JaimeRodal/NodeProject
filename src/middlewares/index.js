@@ -2,4 +2,5 @@
 import Auth from "./auth.js";
 import validation from "./joiValidation.js";
 
+// Exportaciones
 export { Auth, validation };

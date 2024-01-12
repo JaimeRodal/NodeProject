@@ -1,3 +1,4 @@
+// Importaciones
 import express from "express";
 import fileUpload from "express-fileupload";
 import bcrypt from "bcrypt";
@@ -13,6 +14,7 @@ app.use(
   })
 );
 
+// Creamos una función para manejar el registro de un usuario
 const register = async (req, res, next) => {
   try {
     // Obtenemos los parámetros necesarios para el registro del body de la petición
@@ -26,10 +28,10 @@ const register = async (req, res, next) => {
 
       // Guardar la imagen en la carpeta "uploads"
       const nombreArchivoFinal = Date.now() + "-" + photo.name;
-      photo.mv(`./uploads/${nombreArchivoFinal}`);
+      photo.mv(`./uploads/users/${nombreArchivoFinal}`);
 
       // Establecer la ruta de la foto en caso de que se haya subido
-      photoPath = `../../uploads/${nombreArchivoFinal}`;
+      photoPath = `../../uploads/users/${nombreArchivoFinal}`;
     }
     // Verificar si el email ya está en uso
     const emailExists = await emailExist(email);
@@ -52,12 +54,15 @@ const register = async (req, res, next) => {
     // Enviar el correo electrónico
     await sendMailUtil(email, emailSubject, emailBody);
 
+    // Respuesta
     res.status(200).json({
       message: "Usuario creado con éxito!",
     });
   } catch (error) {
+    // En caso de error pasamos el error al middleware de gestión de errores
     next(error);
   }
 };
 
+// Exportaciones
 export default register;

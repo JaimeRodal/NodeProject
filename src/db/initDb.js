@@ -43,7 +43,7 @@ const create = async () => {
             subTitle VARCHAR(50) NOT NULL,
             place VARCHAR(50) NOT NULL,
             text VARCHAR(500) NOT NULL,
-            photo VARCHAR(100),
+            photo VARCHAR(200),
             user_id INT NOT NULL,
             category_id INT NOT NULL,
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,

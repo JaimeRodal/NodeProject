@@ -1,3 +1,4 @@
+// Importaciones
 import express from "express";
 import Auth from "../middlewares/auth.js";
 import validation from "../middlewares/joiValidation.js";
@@ -5,11 +6,11 @@ import {
   insertExperienceController,
   getExperienceController,
   deleteExperienceController,
-  helpExperienceController,
   getExperiencesController,
-  voteExperienceController,
+  modifyExpController,
 } from "../controllers/experiences/index.js";
 import experienceSchema from "../controllers/schemas/experiences/insertExperience.js";
+import idExperienceSchema from "../controllers/schemas/experiences/idExperience.js";
 
 const router = express.Router();
 
@@ -22,24 +23,28 @@ router.post(
 );
 
 // Endpoint de obtención de experiencia por id
-router.get("/experience/:id", getExperienceController);
+router.get(
+  "/experience/:id",
+  validation(idExperienceSchema),
+  getExperienceController
+);
 
 // Endpoint de eliminación de experiencia por id
-router.delete("/experience/:id", Auth, deleteExperienceController);
-
-// Endpoint de voto de experiencia
-router.post("/experience/:id/vote", Auth, voteExperienceController);
+router.delete(
+  "/experience/:id",
+  validation(idExperienceSchema),
+  Auth,
+  deleteExperienceController
+);
 
 // Endpoint de listado de experiencias: búsqueda y listado por votos
-router.get("/experiences", getExperiencesController);
+router.get(
+  "/experiences",
+  validation(idExperienceSchema),
+  getExperiencesController
+);
 
-// Endpoint de ayuda de experiencias
-router.get("/experienceHTML", helpExperienceController);
-
-// router.delete("/deleteExp/:id", Auth, deleteExpController);
-// NOTA: para estandarizar la sintaxis
-
-// router.get("/experience/orderByVotes/:text", votesOrderController);
-// router.get("/search/:text", filterController);
+// Enpoint de modificación de Experiencias
+router.put("/modExperience/:id", Auth, modifyExpController);
 
 export default router;
