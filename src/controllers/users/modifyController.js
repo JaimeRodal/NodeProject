@@ -18,11 +18,9 @@ const modify = async (req, res, next) => {
   try {
     // Guardamos el id del usuario autenticado con el token en una constante
     const authUserId = req.auth;
-    console.log(authUserId);
 
     // Guardamos el id del usuario del que quiere modificar los datos
     const modUser = req.params.id;
-    console.log(modUser);
 
     // Comprobamos que los 2 ids coinciden, si no es así lanza un error
     if (String(authUserId) !== String(modUser)) {
