@@ -15,6 +15,9 @@ const app = express();
 // Hacemos que express interprete los JSON
 app.use(express.json());
 
+// Usamos express.static para convertir en pública la carpeta "uploads"
+app.use(express.static("uploads"));
+
 // Usamos express-fileupload para subir archivos
 app.use(
   fileUpload({
