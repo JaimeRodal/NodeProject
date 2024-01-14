@@ -5,7 +5,7 @@ import Joi from "joi";
 const answerSchema = Joi.object({
   // Definimos los parámetros que se validarán con las caracteríscticas que requiramos
   text: Joi.string()
-    .pattern(/^[a-zA-ZÀ-ÖØ-öø-ÿç\s'-]+$/u)
+    .pattern(/^[a-zA-ZÀ-ÖØ-öø-ÿç\s',.-]+$/u)
     .min(10)
     .max(120)
     .required(),
