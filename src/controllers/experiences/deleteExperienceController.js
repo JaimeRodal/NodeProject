@@ -33,31 +33,6 @@ const deleteExperienceController = async (req, res, next) => {
     }
     // En caso de lo anteriormente comprobado estar correcto, borramos primero las respuestas que esten dentro de la experiencia y dentro de los comentarios con ese ID, además de los votos registrados (borrar en cascada por los FK)
 
-    // Votos
-    await pool.query(
-      `
-      DELETE FROM votes WHERE exp_id = ?
-      `,
-      [id]
-    );
-
-    // Respuestas de comentarios
-    await pool.query(
-      `
-      DELETE FROM answerComments WHERE exp_id = ?
-      `,
-      [id]
-    );
-
-    // Luego borramos los comentarios de la experiencia con ese ID
-
-    await pool.query(
-      `
-      DELETE FROM comments   WHERE exp_id = ?
-      `,
-      [id]
-    );
-
     // Por ultimo borramos la experiencia
     await pool.query(
       `

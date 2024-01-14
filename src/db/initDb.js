@@ -48,8 +48,8 @@ const create = async () => {
             category_id INT NOT NULL,
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
-            FOREIGN KEY(user_id) REFERENCES users(id),
-            FOREIGN KEY(category_id) REFERENCES categories(id)
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(category_id) REFERENCES categories(id) ON DELETE CASCADE
         )
         `);
 
@@ -62,8 +62,8 @@ const create = async () => {
             user_id INT NOT NULL,
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
-            FOREIGN KEY(exp_id) REFERENCES experiences(id),
-            FOREIGN KEY(user_id) REFERENCES users(id)
+            FOREIGN KEY(exp_id) REFERENCES experiences(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
         )
         `);
 
@@ -76,8 +76,8 @@ const create = async () => {
                 user_id INT NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
-                FOREIGN KEY(comment_id) REFERENCES comments(id),
-                FOREIGN KEY(user_id) REFERENCES users(id)
+                FOREIGN KEY(comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+                FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
             )
             `);
 
@@ -89,8 +89,8 @@ const create = async () => {
             exp_id INT NOT NULL,
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
-            FOREIGN KEY(exp_id) REFERENCES experiences(id),
-            FOREIGN KEY(user_id) REFERENCES users(id)
+            FOREIGN KEY(exp_id) REFERENCES experiences(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
         )
         `);
     console.log("Insertando valores iniciales a categorías...");
