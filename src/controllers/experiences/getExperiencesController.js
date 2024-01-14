@@ -17,10 +17,63 @@ const getExperiencesController = async (req, res, next) => {
       // Creamos una petición a la DB pasándole el parámetro anterior
       const [filter] = await pool.query(
         `
-      SELECT exp.title,exp.subTitle,exp.place,exp.text, exp.photo, cat.name FROM experiences exp, categories cat WHERE exp.category_id = cat.id AND (exp.place LIKE ? OR cat.name LIKE ?)
+        SELECT 
+          exp.title,
+          exp.subTitle,
+          exp.place,
+          exp.text,
+          exp.photo,
+          cat.name AS category_name,
+          COALESCE(COUNT(v.exp_id), 0) AS likes,
+          u.name AS user_name,
+          u.photo AS user_photo,
+          CONCAT(
+              '[',
+              GROUP_CONCAT(
+                  CONCAT(
+                      '{"comment_text":"', c.text, '", "comment_user":"', cu.name, '", "answer_text":"', ans.text, '", "answer_user":"', au.name, '"}'
+                  )
+                  ORDER BY c.id, ans.id
+                  SEPARATOR ','
+              ),
+              ']'
+          ) AS comments_and_answers
+              FROM 
+                  experiences exp
+              JOIN 
+                  categories cat ON exp.category_id = cat.id 
+              JOIN 
+                  users u ON exp.user_id = u.id
+              LEFT JOIN 
+                  votes v ON exp.id = v.exp_id
+              LEFT JOIN 
+                  comments c ON exp.id = c.exp_id
+              LEFT JOIN 
+                  answercomments ans ON c.id = ans.comment_id
+              LEFT JOIN 
+                  users cu ON c.user_id = cu.id
+              LEFT JOIN 
+                  users au ON ans.user_id = au.id
+              WHERE 
+                  exp.place LIKE ? OR cat.name LIKE ? OR exp.title LIKE ? OR exp.subTitle LIKE ? OR exp.text LIKE ? OR u.name LIKE ?
+              GROUP BY
+                  exp.title, exp.subTitle, exp.place, exp.text, exp.photo, cat.name, u.name, u.photo
+              ORDER BY 
+                  exp.createdAt DESC;
+
+
+
+
 
     `,
-        [`%${searchText}%`, `%${searchText}%`]
+        [
+          `%${searchText}%`,
+          `%${searchText}%`,
+          `%${searchText}%`,
+          `%${searchText}%`,
+          `%${searchText}%`,
+          `%${searchText}%`,
+        ]
       );
 
       // En caso de no haber ninguna coincidencia de búsqueda genera mensaje de error
@@ -43,12 +96,47 @@ const getExperiencesController = async (req, res, next) => {
 
       // Creamos la query de SQL pasándole el parámetro adecuado a la petición
       const sqlQuery = `
-      SELECT exp.title, exp.subTitle, exp.place, exp.text, exp.photo, cat.name, COUNT(v.exp_id) AS vote_count
-      FROM experiences exp
-      JOIN categories cat ON exp.category_id = cat.id
-      LEFT JOIN votes v ON exp.id = v.exp_id
-      GROUP BY exp.id, exp.title, exp.subTitle, exp.place, exp.text, exp.photo, cat.name
-      ORDER BY vote_count ${order === "DESC" ? "DESC" : "ASC"}
+      SELECT 
+          exp.title,
+          exp.subTitle,
+          exp.place,
+          exp.text,
+          exp.photo,
+          cat.name AS category_name,
+          COALESCE(COUNT(v.exp_id), 0) AS likes,
+          u.name AS user_name,
+          u.photo AS user_photo,
+          CONCAT(
+              '[',
+              GROUP_CONCAT(
+                  CONCAT(
+                      '{"comment_text":"', c.text, '", "comment_user":"', cu.name, '", "answer_text":"', ans.text, '", "answer_user":"', au.name, '"}'
+                  )
+                  ORDER BY c.id, ans.id
+                  SEPARATOR ','
+              ),
+              ']'
+          ) AS comments_and_answers
+              FROM 
+                  experiences exp
+              JOIN 
+                  categories cat ON exp.category_id = cat.id 
+              JOIN 
+                  users u ON exp.user_id = u.id
+              LEFT JOIN 
+                  votes v ON exp.id = v.exp_id
+              LEFT JOIN 
+                  comments c ON exp.id = c.exp_id
+              LEFT JOIN 
+                  answercomments ans ON c.id = ans.comment_id
+              LEFT JOIN 
+                  users cu ON c.user_id = cu.id
+              LEFT JOIN 
+                  users au ON ans.user_id = au.id
+              GROUP BY
+                  exp.title, exp.subTitle, exp.place, exp.text, exp.photo, cat.name, u.name, u.photo
+              ORDER BY 
+                  likes ${order === "DESC" ? "DESC" : "ASC"};
     `;
 
       // Realizamos la petición a la DB
