@@ -20,7 +20,7 @@ const insertComment = async ({ text, exp_id, user_id }) => {
     return insertId;
   } catch (error) {
     // En caso de haber algún error, lo manejamos
-    throw genError("Error insertando comentario", 400);
+    throw genError(`Error insertando comentario: ${error.message}`, 400);
   }
 };
 
