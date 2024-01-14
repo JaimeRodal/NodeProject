@@ -18,6 +18,11 @@ const answerCommentController = async (req, res, next) => {
       throw genError("Debes registrarte para comentar experiencias", 401);
     }
 
+    // En caso de no existir el comentario al que quieres responder, te muestra el siguiente mensaje de error
+    if (!comment_id) {
+      throw genError("El comentario al que intentas responder no existe");
+    }
+
     // Pasamos los parámetros anteriores a la función encargada de insertarlo (Ver descripción de la función en su respectivo archivo)
     await insertAnswer({ text, comment_id, id, user_id });
 
