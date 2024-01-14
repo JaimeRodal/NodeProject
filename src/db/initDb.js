@@ -77,7 +77,6 @@ const create = async () => {
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY(comment_id) REFERENCES comments(id),
-                FOREIGN KEY(exp_id) REFERENCES experiences(id),
                 FOREIGN KEY(user_id) REFERENCES users(id)
             )
             `);
@@ -90,6 +89,7 @@ const create = async () => {
             exp_id INT NOT NULL,
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
+            FOREIGN KEY(exp_id) REFERENCES experiences(id),
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
         `);
