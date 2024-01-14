@@ -73,7 +73,6 @@ const create = async () => {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 text VARCHAR(200) NOT NULL,
                 comment_id INT NOT NULL,
-                exp_id INT NOT NULL,
                 user_id INT NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
@@ -91,7 +90,6 @@ const create = async () => {
             exp_id INT NOT NULL,
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
-            FOREIGN KEY(exp_id) REFERENCES experiences(id),
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
         `);
