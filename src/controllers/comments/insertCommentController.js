@@ -16,7 +16,10 @@ const insertCommentController = async (req, res, next) => {
     if (!user_id) {
       throw genError("Debes registrarte para comentar experiencias", 401);
     }
-
+    // Validamos que la experiencia exista
+    if (!exp_id) {
+      throw genError("No existe la experiencia en la que quieres comentar");
+    }
     // Pasamos los parámetros anteriores a la función encargada de insertarlo (Ver descripción de la función en su respectivo archivo)
     await insertComment({ text, exp_id, user_id });
 
