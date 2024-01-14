@@ -37,12 +37,7 @@ const register = async (req, res, next) => {
       http://${HOST_DB}:${PORT}/users/${nombreArchivoFinal}`;
     }
     // Verificar si el email ya está en uso
-    const emailExists = await emailExist(email);
-
-    // De existir un usuario con el mismo email, generar un error con mensaje
-    if (emailExists) {
-      throw genError("El email ya está en uso", 400);
-    }
+    await emailExist(email);
 
     // Hashear la contraseña
     const hashedPass = await bcrypt.hash(password, 5);

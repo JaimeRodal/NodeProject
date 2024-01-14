@@ -13,11 +13,6 @@ const answerCommentController = async (req, res, next) => {
     // "comment_id" -> Obtenemos la id del comentario
     const { id, comment_id } = req.params;
 
-    //  En caso de no estar registrado y querer comentar una experiencia, te muestra el siguiente mensaje de error
-    if (!user_id) {
-      throw genError("Debes registrarte para comentar experiencias", 401);
-    }
-
     // En caso de no existir el comentario al que quieres responder, te muestra el siguiente mensaje de error
     if (!comment_id) {
       throw genError("El comentario al que intentas responder no existe");
