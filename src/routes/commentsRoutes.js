@@ -5,6 +5,7 @@ import validation from "../middlewares/joiValidation.js";
 import {
   insertCommentController,
   answerCommentController,
+  deleteCommentController,
 } from "../controllers/comments/index.js";
 import commentSchema from "../controllers/schemas/comments/insertComment.js";
 import answerSchema from "../controllers/schemas/comments/insertAnswer.js";
@@ -24,6 +25,12 @@ router.post(
   validation(answerSchema),
   Auth,
   answerCommentController
+);
+
+router.delete(
+  "/experience/:id/comment/:comment_id",
+  Auth,
+  deleteCommentController
 );
 
 // Exportaciones

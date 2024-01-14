@@ -39,6 +39,16 @@ const insertExperienceController = async (req, res, next) => {
     // Establecer la ruta de la foto en caso de que se haya subido
     const photoPath = `http://${HOST_DB}:${PORT}/experiences/${nombreArchivoFinal}`;
 
+    // Validar que el ID de la categoría existe antes de insertar la experiencia
+    const categoryExistsQuery = `
+      SELECT id FROM categories WHERE id = ?
+    `;
+    const [categoryResult] = await pool.query(categoryExistsQuery, [category]);
+
+    if (!categoryResult.length) {
+      throw genError("La categoría especificada no existe", 400);
+    }
+
     // Llamamos a la función encargada de insertar los datos de la experiencia(Ver explicación en su respectivo lugar)
     await insertExperience({
       title,

@@ -26,6 +26,11 @@ const modifyExpController = async (req, res, next) => {
       [id]
     );
 
+    // Si no se encuentra la experiencia, generamos un error
+    if (!checkExp) {
+      throw genError("La experiencia que intentas modificar no existe", 404);
+    }
+
     // Comprobamos que tanto la "id" del usuario de la autentificación como la de la experiencia coinciden, de no hacerlo generamos un error
     if (String(authUserId) !== String(checkExp.user_id)) {
       throw genError("No tienes permisos para editar esta experiencia", 403);
