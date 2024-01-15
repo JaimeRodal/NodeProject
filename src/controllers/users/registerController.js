@@ -1,20 +1,9 @@
 // Importaciones
-import express from "express";
-import fileUpload from "express-fileupload";
 import bcrypt from "bcrypt";
 import sendMailUtil from "../../utils/sendMail.js";
-import genError from "../../utils/helpers.js";
 import { insertUser, emailExist } from "../../models/users/registerUser.js";
 import { nanoid } from "nanoid";
 import { HOST_DB, PORT } from "../../../env.js";
-const app = express();
-
-// Middleware para poder subir archivos
-app.use(
-  fileUpload({
-    createParentPath: true,
-  })
-);
 
 // Creamos una función para manejar el registro de un usuario
 const register = async (req, res, next) => {
