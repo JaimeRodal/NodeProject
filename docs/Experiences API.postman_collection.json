@@ -1,0 +1,502 @@
+{
+	"info": {
+		"_postman_id": "62fce16f-9fbe-46c4-936d-bb8b0bf68a54",
+		"name": "Experiences API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31710794"
+	},
+	"item": [
+		{
+			"name": "Registrar Usuario",
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Juan",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Tamariz",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "lovesynoloves@baraja.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/home/victo/Descargas/terminator.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3030/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Iniciar Sesión Usuario",
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "lovesynoloves@baraja.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3030/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Usuario",
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/user/22",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"user",
+						"22"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Usuario",
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "lastName",
+							"value": "Tamariz y Tamariz",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3030/user/23",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"user",
+						"23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Experiencias",
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/experiences?list=search&text=de",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experiences"
+					],
+					"query": [
+						{
+							"key": "list",
+							"value": "search"
+						},
+						{
+							"key": "text",
+							"value": "de"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Experiencias por votos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/experiences?list=votes&order=DESC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experiences"
+					],
+					"query": [
+						{
+							"key": "list",
+							"value": "votes"
+						},
+						{
+							"key": "order",
+							"value": "ASC",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "DESC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insertar Experiencia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDI5MDI4OTMsImV4cCI6MTcwMzA3NTY5M30.45A3wxoLFd79AiBtC8mS1c3c8TASqN3JutbcGBQGdCc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Visita a Gaza",
+							"type": "text"
+						},
+						{
+							"key": "subTitle",
+							"value": "Ha sido terrible, ni un bar abierto!",
+							"type": "text"
+						},
+						{
+							"key": "place",
+							"value": "Gaza, ciudad de vacaciones",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "Ni tiempo hemos tenido para ver los bombardeos nocturnos, y es servicio está fatal. Ya me lo decía mi mujer, que estaba demasiado barato.",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/home/victo/Descargas/ucrania-destruccion-2214580920.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3030/experience",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experience"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Experiencia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzAyODk5OTE3LCJleHAiOjE3MDMwNzI3MTd9.xO_ZobxSVZWkk2aLTlsG_HRLOjkqgk7SccRPq3rMftY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Visita a Gaza2",
+							"type": "text"
+						},
+						{
+							"key": "subTitle",
+							"value": "Ha sido terrible, ni un bar abierto!",
+							"type": "text"
+						},
+						{
+							"key": "place",
+							"value": "Gaza, ciudad de vacaciones",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "Ni tiempo hemos tenido para ver los bombardeos nocturnos, y es servicio está fatal. Ya me lo decía mi mujer, que estaba demasiado barato.",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/home/victo/Descargas/ucrania-destruccion-2214580920.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3030/modExperience/18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"modExperience",
+						"18"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Experiencia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzAyODk5OTE3LCJleHAiOjE3MDMwNzI3MTd9.xO_ZobxSVZWkk2aLTlsG_HRLOjkqgk7SccRPq3rMftY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/experience/18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experience",
+						"18"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Votar Experiencia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDI5MDI4OTMsImV4cCI6MTcwMzA3NTY5M30.45A3wxoLFd79AiBtC8mS1c3c8TASqN3JutbcGBQGdCc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/experience/1/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experience",
+						"1",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Experiencia",
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/experience/18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experience",
+						"18"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comentar Experiencia",
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "text",
+							"value": "comentario1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3030/experience/1/comment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experience",
+						"1",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Responder Comentario",
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "text",
+							"value": "comentario1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3030/experience/1/comment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experience",
+						"1",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -9,7 +9,7 @@ const pool = await getPool();
 const insertAnswer = async ({ text, comment_id, id, user_id }) => {
   try {
     // Creamos el query de la petición a DB
-    const sqlQuery = `INSERT INTO answercomments (text, comment_id, user_id) VALUES (?,?,?)`;
+    const sqlQuery = `INSERT INTO answerComments (text, comment_id, user_id) VALUES (?,?,?)`;
 
     // Valores que meteremos en la query
     const sqlValues = [text, comment_id, user_id];

@@ -1,10 +1,14 @@
 // Importaciones
+import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
 import { insertExperience } from "../../models/experiences/index.js";
 import fileUpload from "express-fileupload";
 import express from "express";
 import { nanoid } from "nanoid";
 import { HOST_DB, PORT } from "../../../env.js";
+
+// Importamos e usamos el gestor de conexión a la DB
+const pool = await getPool();
 
 // Definimos express en una variable para su uso
 const app = express();
