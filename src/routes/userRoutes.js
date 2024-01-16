@@ -10,11 +10,13 @@ import registerSchema from "../controllers/schemas/users/registerUser.js";
 import loginSchema from "../controllers/schemas/users/loginUser.js";
 import modifyUserSchema from "../controllers/schemas/users/modifyUser.js";
 import deleteUserSchema from "../controllers/schemas/users/deleteUser.js";
+import getUserController from "../controllers/users/getUserController.js";
 
 //Enrutador de express
 const router = express.Router();
 
 // Creamos las distintas rutas con sus métodos
+router.get("/user/:id", Auth, getUserController);
 router.post("/register", validation(registerSchema), registerController);
 router.post("/login", validation(loginSchema), loginController);
 router.delete(
