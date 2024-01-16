@@ -1,18 +1,9 @@
 // Importaciones
-import express from "express";
-import fileUpload from "express-fileupload";
 import bcrypt from "bcrypt";
 import sendMailUtil from "../../utils/sendMail.js";
-import genError from "../../utils/helpers.js";
 import { insertUser, emailExist } from "../../models/users/registerUser.js";
-const app = express();
-
-// Middleware para poder subir archivos
-app.use(
-  fileUpload({
-    createParentPath: true,
-  })
-);
+import { nanoid } from "nanoid";
+import { HOST_DB, PORT } from "../../../env.js";
 
 // Creamos una función para manejar el registro de un usuario
 const register = async (req, res, next) => {
@@ -27,19 +18,15 @@ const register = async (req, res, next) => {
       const photo = req.files.photo;
 
       // Guardar la imagen en la carpeta "uploads"
-      const nombreArchivoFinal = Date.now() + "-" + photo.name;
+      const nombreArchivoFinal = nanoid() + "-" + photo.name;
       photo.mv(`./uploads/users/${nombreArchivoFinal}`);
 
       // Establecer la ruta de la foto en caso de que se haya subido
-      photoPath = `../../uploads/users/${nombreArchivoFinal}`;
+      photoPath = `
+      http://${HOST_DB}:${PORT}/users/${nombreArchivoFinal}`;
     }
     // Verificar si el email ya está en uso
-    const emailExists = await emailExist(email);
-
-    // De existir un usuario con el mismo email, generar un error con mensaje
-    if (emailExists) {
-      throw genError("El email ya está en uso", 400);
-    }
+    await emailExist(email);
 
     // Hashear la contraseña
     const hashedPass = await bcrypt.hash(password, 5);

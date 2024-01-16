@@ -21,8 +21,6 @@ const registerSchema = Joi.object({
   password: Joi.string()
     .pattern(/^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]+$/)
     .required(),
-
-  photoPath: [Joi.string()],
 });
 // Exportamos el Schema
 export default registerSchema;

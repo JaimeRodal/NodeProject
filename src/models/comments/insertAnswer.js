@@ -9,10 +9,10 @@ const pool = await getPool();
 const insertAnswer = async ({ text, comment_id, id, user_id }) => {
   try {
     // Creamos el query de la petición a DB
-    const sqlQuery = `INSERT INTO answercomments (text, comment_id, exp_id, user_id) VALUES (?,?,?,?)`;
+    const sqlQuery = `INSERT INTO answerComments (text, comment_id, user_id) VALUES (?,?,?)`;
 
     // Valores que meteremos en la query
-    const sqlValues = [text, comment_id, id, user_id];
+    const sqlValues = [text, comment_id, user_id];
 
     // Petición a la DB
     const [{ insertId }] = await pool.query(sqlQuery, sqlValues);
@@ -20,7 +20,7 @@ const insertAnswer = async ({ text, comment_id, id, user_id }) => {
     return insertId;
   } catch (error) {
     // De haber algún error, lo manejamos
-    throw genError("Error insertando comentario", 400);
+    throw genError(`Error insertando comentario: ${error.message}`, 400);
   }
 };
 

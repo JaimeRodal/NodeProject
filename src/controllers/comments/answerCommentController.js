@@ -11,15 +11,15 @@ const answerCommentController = async (req, res, next) => {
     const user_id = req.auth;
     // "id" -> Obtenemos la id de la experiencia
     // "comment_id" -> Obtenemos la id del comentario
-    const { id, comment_id } = req.params;
+    const { comment_id } = req.params;
 
-    //  En caso de no estar registrado y querer comentar una experiencia, te muestra el siguiente mensaje de error
-    if (!user_id) {
-      throw genError("Debes registrarte para comentar experiencias", 401);
+    // En caso de no existir el comentario al que quieres responder, te muestra el siguiente mensaje de error
+    if (!comment_id) {
+      throw genError("El comentario al que intentas responder no existe");
     }
 
     // Pasamos los parámetros anteriores a la función encargada de insertarlo (Ver descripción de la función en su respectivo archivo)
-    await insertAnswer({ text, comment_id, id, user_id });
+    await insertAnswer({ text, comment_id, user_id });
 
     // Respuesta
     res.status(201).json({

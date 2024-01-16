@@ -16,6 +16,19 @@ const votesController = async (req, res, next) => {
       throw genError("No estás registrado", 401);
     }
 
+    // Comprobamos si la experiencia existe
+    const [[experience]] = await pool.query(
+      `
+      SELECT * FROM experiences WHERE id = ?
+    `,
+      [id]
+    );
+
+    // Si la experiencia no existe, generamos un error
+    if (!experience) {
+      throw genError("La experiencia que intentas votar no existe", 404);
+    }
+
     //   Comprobamos si el voto existe pasándole los datos necesarios
     const [result] = await pool.query(
       `

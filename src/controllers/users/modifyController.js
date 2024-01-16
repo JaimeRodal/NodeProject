@@ -1,28 +1,19 @@
 // Importaciones
-import express from "express";
-import fileUpload from "express-fileupload";
 import getPool from "../../db/getPool.js";
 import bcrypt from "bcrypt";
 import genError from "../../utils/helpers.js";
 
-// Guardamos express en una variable para su uso
-const modifyApp = express();
 // Guardamos en una variable el gestor de conexiones a la DB para su uso
 const pool = await getPool();
-
-// Middleware para poder subir archivos
-modifyApp.use(fileUpload({ createParentPath: true }));
 
 // Función para modificar los datos
 const modify = async (req, res, next) => {
   try {
     // Guardamos el id del usuario autenticado con el token en una constante
     const authUserId = req.auth;
-    console.log(authUserId);
 
     // Guardamos el id del usuario del que quiere modificar los datos
     const modUser = req.params.id;
-    console.log(modUser);
 
     // Comprobamos que los 2 ids coinciden, si no es así lanza un error
     if (String(authUserId) !== String(modUser)) {
@@ -83,6 +74,13 @@ const modify = async (req, res, next) => {
 
     // Eliminamos la coma del query de la última actualización que se haga
     updateQuery = updateQuery.slice(0, -1);
+
+    if (!name && !lastName && !email && !password && !req.files.avatar) {
+      throw genError(
+        "Para modificar datos debes insertar al menos un campo",
+        400
+      );
+    }
 
     // Agregamos la condición WHERE para el usuario específico
     updateQuery += " WHERE id=?";

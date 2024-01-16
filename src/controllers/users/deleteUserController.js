@@ -34,37 +34,6 @@ const deleteUserController = async (req, res, next) => {
 
     await pool.query(
       `
-      DELETE FROM votes WHERE user_id = ?
-      `,
-      [id]
-    );
-
-    await pool.query(
-      `
-      DELETE FROM answerComments WHERE user_id = ?
-      `,
-      [id]
-    );
-
-    // Luego borramos los comentarios de la experiencia con ese ID
-
-    await pool.query(
-      `
-      DELETE FROM comments   WHERE user_id = ?
-      `,
-      [id]
-    );
-
-    // Por ultimo borramos la experiencia
-    await pool.query(
-      `
-      DELETE FROM experiences WHERE user_id = ?
-      `,
-      [id]
-    );
-
-    await pool.query(
-      `
     DELETE FROM users WHERE id = ?
     `,
       [id]

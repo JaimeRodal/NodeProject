@@ -19,8 +19,6 @@ const modifyUserSchema = Joi.object({
   password: Joi.string().pattern(
     /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]+$/
   ),
-
-  photoPath: [Joi.string()],
 });
 // Exportamos el Schema
 export default modifyUserSchema;

@@ -13,10 +13,9 @@ const insertCommentController = async (req, res, next) => {
     const user_id = req.auth;
 
     //  En caso de no estar registrado y querer comentar una experiencia, te muestra el siguiente mensaje de error
-    if (!user_id) {
-      throw genError("Debes registrarte para comentar experiencias", 401);
+    if (!exp_id) {
+      throw genError("No existe la experiencia en la que quieres comentar");
     }
-
     // Pasamos los parámetros anteriores a la función encargada de insertarlo (Ver descripción de la función en su respectivo archivo)
     await insertComment({ text, exp_id, user_id });
 

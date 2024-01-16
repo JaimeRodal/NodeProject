@@ -44,11 +44,16 @@ const emailExist = async (email) => {
     const sqlValues = [email];
 
     // Realizamos la petición a sql
-    const [{ insertId }] = await pool.query(sqlQuery, sqlValues);
-    return insertId;
+    const [result] = await pool.query(sqlQuery, sqlValues);
+
+    if (result.length > 0) {
+      throw genError("El email ya está en uso", 400);
+    }
+
+    return result;
   } catch (error) {
     // En caso de haber algun error, lo gestionamos
-    throw genError("Error buscando el usuario", 400);
+    throw genError(`Error buscando el usuario: ${error.message}`, 400);
   }
 };
 

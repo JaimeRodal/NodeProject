@@ -7,25 +7,25 @@ const experienceSchema = Joi.object({
   id: Joi.number().integer().positive().required(),
 
   title: Joi.string()
-    .pattern(/^[a-zA-Z0-9À-ÖØ-öø-ÿç\s'-]+$/u)
+    .pattern(/^[/^[a-zA-ZÀ-ÖØ-öø-ÿç\s',.:;-]+$/u)
     .min(3)
     .max(75)
     .required(),
 
   subTitle: Joi.string()
-    .pattern(/^[a-zA-Z0-9À-ÖØ-öø-ÿç\s'-]+$/u)
+    .pattern(/^[a-z/^[a-zA-ZÀ-ÖØ-öø-ÿç\s',.:-]+$/u)
     .min(3)
     .max(50)
     .required(),
 
   place: Joi.string()
-    .pattern(/^[a-zA-Z0-9À-ÖØ-öø-ÿç\s'-]+$/u)
+    .pattern(/^[/^[a-zA-ZÀ-ÖØ-öø-ÿç\s',.:-]+$/u)
     .min(3)
     .max(50)
     .required(),
 
   text: Joi.string()
-    .pattern(/^[a-zA-Z0-9À-ÖØ-öø-ÿç\s'-]+$/u)
+    .pattern(/^[/^[a-zA-ZÀ-ÖØ-öø-ÿç\s',.:-]+$/u)
     .min(20)
     .max(250)
     .required(),

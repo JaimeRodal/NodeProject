@@ -23,14 +23,14 @@ const login = async (req, res, next) => {
 
     // En caso de no existir ese usuario, generar un error con mensaje
     if (!userFound) {
-      throw genError("Usuario no registrado", 401);
+      throw genError("Email o contraseña incorrectas", 401);
     }
     // De existir el usuario, comparar la contraseña de la DB con la obtenida por parámetro en la función
     const passwordMatch = await bcrypt.compare(password, result[0].password);
 
     // En caso de no coincidir la contraseña, generar un error con mensaje
     if (!passwordMatch) {
-      throw genError("Email o contraseña incorrectas", 400);
+      throw genError("Email o contraseña incorrectas", 401);
     }
 
     // Habiendo coincidido la contraseña en el anterior punto, firmamos el token que identificará al usuario para realizar otro tipo de peticiones que dependan de autorización
