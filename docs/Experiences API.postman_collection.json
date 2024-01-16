@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "62fce16f-9fbe-46c4-936d-bb8b0bf68a54",
+		"_postman_id": "5e772109-49a5-4c71-abc8-a91ace5d9ce6",
 		"name": "Experiences API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31710794"
+		"_exporter_id": "25440141"
 	},
 	"item": [
 		{
@@ -184,12 +184,12 @@
 			"response": []
 		},
 		{
-			"name": "Listar Experiencias por votos",
+			"name": "Listar Experiencias",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3030/experiences?list=votes&order=DESC",
+					"raw": "http://localhost:3030/experiences",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -200,17 +200,111 @@
 					],
 					"query": [
 						{
-							"key": "list",
-							"value": "votes"
-						},
+							"key": "order",
+							"value": "ASC",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Experiencias filtradas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/experiences?search=Gaza",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experiences"
+					],
+					"query": [
 						{
 							"key": "order",
 							"value": "ASC",
 							"disabled": true
 						},
 						{
+							"key": "search",
+							"value": "Gaza"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Experiencias filtradas y por votos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/experiences?orderBy=votes&orderDirection=ASC&search=Gaza",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experiences"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "votes"
+						},
+						{
+							"key": "orderDirection",
+							"value": "ASC"
+						},
+						{
+							"key": "search",
+							"value": "Gaza"
+						},
+						{
 							"key": "order",
-							"value": "DESC"
+							"value": "ASC",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Experiencias por votos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/experiences?orderBy=votes&orderDirection=ASC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"experiences"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "votes"
+						},
+						{
+							"key": "orderDirection",
+							"value": "ASC"
+						},
+						{
+							"key": "order",
+							"value": "ASC",
+							"disabled": true
 						}
 					]
 				}

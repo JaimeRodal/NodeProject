@@ -14,17 +14,7 @@ const insertUser = async ({ name, lastName, email, hashedPass, photoPath }) => {
     // Guardamos en una variable los valores que le vamos a pasar a la query
     const sqlValues = [name, lastName, email, hashedPass, photoPath];
 
-<<<<<<< HEAD
-    let sqlValues_temp = new Array(sqlValues);
-    const sql = sqlQuery.replace(
-      /\?/g,
-      (match) => `'${sqlValues_temp.shift()}'`
-    );
-    console.log("Query: " + sql);
-
-=======
     // Realizamos la petición a DB
->>>>>>> main
     const [{ insertId }] = await pool.query(sqlQuery, sqlValues);
 
     return insertId;
