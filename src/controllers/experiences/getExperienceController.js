@@ -76,7 +76,7 @@ const getExperienceController = async (req, res, next) => {
     const [[getId]] = await pool.query(query, [id]);
 
     // En caso de no haber ninguna experiencia con la "id" que solicitamos, generamos el siguiente mensaje de error
-    if (!getId) {
+    if (!getId || getId.title === null) {
       throw genError("No hay coincidencias en tu búsqueda", 404);
     }
 

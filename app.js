@@ -29,7 +29,12 @@ app.use(
 app.use(morgan("dev"));
 
 // Usamos CORS para proteger las peticiones al servicio solamente con los http permitidos
-const allowedHttp = ["http:/localhost:3030", "http:/localhost:3001"];
+const allowedHttp = [
+  "http://localhost:3030",
+  "http://localhost:3001",
+  "http://localhost:5173",
+];
+
 app.use(cors({ origin: allowedHttp }));
 
 //Middleware llamando a las rutas
