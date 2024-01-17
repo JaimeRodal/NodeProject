@@ -103,7 +103,7 @@ const getExperiencesController = async (req, res, next) => {
         `%${search}%`,
         `%${search}%`,
       ]);
-      console.log(list);
+      // console.log(list);
       res.send({
         status: "Correcto",
         data: list,
@@ -113,14 +113,14 @@ const getExperiencesController = async (req, res, next) => {
     else {
       query = query_list + "\n" + query;
       const [list] = await pool.query(query);
-      console.log(list);
+      // console.log(list);
       res.send({
         status: "Correcto",
         data: list,
       });
     }
 
-    console.log("query: " + query);
+    // console.log("query: " + query);
   } catch (error) {
     // En caso de error pasamos el error al middleware de gestión de errores
     next(error);
