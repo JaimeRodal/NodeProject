@@ -23,48 +23,25 @@ const getExperiencesController = async (req, res, next) => {
         '[',
         GROUP_CONCAT(
             CONCAT(
-                '{"comment_text":"', c.text, '", "comment_user":"', cu.name, '", "answers": ',
-                COALESCE(
-                    (SELECT 
-                        CONCAT(
-                            '[',
-                            GROUP_CONCAT(
-                                CONCAT(
-                                    '{"answer_text":"', ans.text, '", "answer_user":"', au.name, '"}'
-                                )
-                                ORDER BY ans.id
-                                SEPARATOR ','
-                            ),
-                            ']'
-                        )
-                    FROM answerComments ans
-                    JOIN users au ON ans.user_id = au.id
-                    WHERE ans.comment_id = c.id),
-                    '[]'
-                ),
-                '}'
+                '{"comment_id":"', c.id, '","comment_text":"', c.text, '", "comment_user":"', cu.name, '"}'
             )
             ORDER BY c.id
             SEPARATOR ','
         ),
         ']'
-    ) AS comments_and_answers
-        FROM 
-            experiences exp
-        JOIN 
-            categories cat ON exp.category_id = cat.id 
-        JOIN 
-            users u ON exp.user_id = u.id
-        LEFT JOIN 
-            votes v ON exp.id = v.exp_id
-        LEFT JOIN 
-            comments c ON exp.id = c.exp_id
-        LEFT JOIN 
-            answerComments ans ON c.id = ans.comment_id
-        LEFT JOIN 
-            users cu ON c.user_id = cu.id
-        LEFT JOIN 
-            users au ON ans.user_id = au.id`;
+    ) AS comments
+FROM 
+    experiences exp
+JOIN 
+    categories cat ON exp.category_id = cat.id 
+JOIN 
+    users u ON exp.user_id = u.id
+LEFT JOIN 
+    votes v ON exp.id = v.exp_id
+LEFT JOIN 
+    comments c ON exp.id = c.exp_id
+LEFT JOIN 
+    users cu ON c.user_id = cu.id`;
     const query_where = `WHERE 
             exp.place LIKE ? OR cat.name LIKE ? OR exp.title LIKE ? OR exp.subTitle LIKE ? OR exp.text LIKE ? OR u.name LIKE ?`;
     const query_group = `GROUP BY

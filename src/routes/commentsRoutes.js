@@ -7,6 +7,7 @@ import {
   answerCommentController,
   deleteCommentController,
   deleteAnswerCommentController,
+  getAnswersController,
 } from "../controllers/comments/index.js";
 import commentSchema from "../controllers/schemas/comments/insertComment.js";
 import answerSchema from "../controllers/schemas/comments/insertAnswer.js";
@@ -39,6 +40,8 @@ router.delete(
   Auth,
   deleteAnswerCommentController
 );
+
+router.get("/comment/:comment_id/answer", getAnswersController);
 
 // Exportaciones
 export default router;
