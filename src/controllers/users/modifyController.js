@@ -25,10 +25,10 @@ const modify = async (req, res, next) => {
 
     // Verificamos si hay un archivo para actualizar la foto
     let photoPath = null;
-    if (req.files && req.files.avatar) {
-      const avatar = req.files.avatar;
-      const finalFileName = Date.now() + "-" + avatar.name;
-      avatar.mv(`./uploads/${finalFileName}`);
+    if (req.files && req.files.photo) {
+      const photo = req.files.photo;
+      const finalFileName = Date.now() + "-" + photo.name;
+      photo.mv(`./uploads/${finalFileName}`);
       photoPath = `../../uploads/${finalFileName}`;
     }
 
@@ -75,7 +75,7 @@ const modify = async (req, res, next) => {
     // Eliminamos la coma del query de la última actualización que se haga
     updateQuery = updateQuery.slice(0, -1);
 
-    if (!name && !lastName && !email && !password && !req.files.avatar) {
+    if (!name && !lastName && !email && !password && !req.files.photo) {
       throw genError(
         "Para modificar datos debes insertar al menos un campo",
         400
