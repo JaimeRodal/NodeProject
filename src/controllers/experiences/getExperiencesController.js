@@ -46,7 +46,7 @@ LEFT JOIN
     const query_where = `WHERE 
             exp.place LIKE ? OR cat.name LIKE ? OR exp.title LIKE ? OR exp.subTitle LIKE ? OR exp.text LIKE ? OR u.name LIKE ?`;
     const query_group = `GROUP BY
-            exp.title, exp.subTitle, exp.place, exp.text, exp.photo, cat.name, u.name, u.photo`;
+            exp.id`;
     const query_order = `ORDER BY 
             likes `;
 
