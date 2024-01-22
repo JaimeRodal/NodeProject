@@ -39,7 +39,7 @@ router.delete(
 
 // Endpoint de listado de experiencias: búsqueda y listado por votos
 router.get(
-  "/experiences",
+  "/getexperiences",
   validation(idExperienceSchema),
   getExperiencesController
 );
