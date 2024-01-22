@@ -30,7 +30,7 @@ app.use(morgan("dev"));
 
 // Usamos CORS para proteger las peticiones al servicio solamente con los http permitidos
 const allowedHttp = [
-  "http://localhost:3030",
+  "http://localhost:3000",
   "http://localhost:3001",
   "http://localhost:5173",
 ];

@@ -7,9 +7,13 @@ const getAnswersController = async (req, res, next) => {
   try {
     const { comment_id } = req.params;
 
-    const query = `SELECT u.name, ans.text FROM answercomments ans LEFT JOIN users u ON u.id = ans.user_id WHERE comment_id = ? `;
+    const query = `SELECT u.name, ans.text
+    FROM answercomments ans
+    LEFT JOIN users u ON u.id = ans.user_id
+    WHERE ans.comment_id = ?
+     `;
 
-    const [[getAnswer]] = await pool.query(query, [comment_id]);
+    const [getAnswer] = await pool.query(query, [comment_id]);
     console.log(getAnswer);
 
     if (!getAnswer) {
