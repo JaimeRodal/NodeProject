@@ -50,6 +50,10 @@ const login = async (req, res, next) => {
       status: "Correcto",
       message: "Bienvenid@",
       token,
+      id:userFound.id,
+      name: userFound.name,
+      lastName: userFound.lastName,
+      photoPath: userFound.photo,
     });
   } catch (error) {
     // En caso de error pasamos el error al middleware de gestión de errores
