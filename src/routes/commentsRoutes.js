@@ -11,6 +11,7 @@ import {
 } from "../controllers/comments/index.js";
 import commentSchema from "../controllers/schemas/comments/insertComment.js";
 import answerSchema from "../controllers/schemas/comments/insertAnswer.js";
+import getCommentsController from "../controllers/comments/getCommentsController.js";
 
 // Guardamos en una variable el gestor de rutas
 const router = express.Router();
@@ -42,6 +43,7 @@ router.delete(
 );
 
 router.get("/comment/:comment_id/answer", getAnswersController);
+router.get("/comments/:id", getCommentsController);
 
 // Exportaciones
 export default router;

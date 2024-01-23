@@ -2,6 +2,8 @@
 import getPool from "../../db/getPool.js";
 import bcrypt from "bcrypt";
 import genError from "../../utils/helpers.js";
+import { HOST_DB, PORT } from "../../../env.js";
+import { nanoid } from "nanoid";
 
 // Guardamos en una variable el gestor de conexiones a la DB para su uso
 const pool = await getPool();
@@ -27,9 +29,9 @@ const modify = async (req, res, next) => {
     let photoPath = null;
     if (req.files && req.files.photo) {
       const photo = req.files.photo;
-      const finalFileName = Date.now() + "-" + photo.name;
-      photo.mv(`./uploads/${finalFileName}`);
-      photoPath = `../../uploads/${finalFileName}`;
+      const finalFileName = nanoid() + "-" + photo.name;
+      photo.mv(`./uploads/users/${finalFileName}`);
+      photoPath = `http://${HOST_DB}:${PORT}/users/${finalFileName}`;
     }
 
     // Hasheamos la contraseña si se proporciona
