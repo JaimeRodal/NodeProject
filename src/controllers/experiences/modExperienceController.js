@@ -45,7 +45,7 @@ const modifyExpController = async (req, res, next) => {
       const avatar = req.files.avatar;
       const finalFileName = Date.now() + "-" + avatar.name;
       avatar.mv(`./uploads/experiences/${finalFileName}`);
-      photoPath = `../../uploads/experiences/${finalFileName}`;
+      photoPath = `http://${HOST_DB}:${PORT}/experiences/${finalFileName}`;
     }
 
     // Aquí incluimos la consulta a la base de datos para actualizar los valores, donde más adelante añadimos valores a la Query según se modifiquen unos valores u otros
