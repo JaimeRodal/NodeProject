@@ -3,6 +3,7 @@ import express from "express";
 import fileUpload from "express-fileupload";
 import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
+import { HOST_DB, PORT } from "../../../env.js";
 
 // Definimos una variable para el uso de express
 const modifyApp = express();
@@ -58,7 +59,7 @@ const modifyExpController = async (req, res, next) => {
       values.push(title);
     }
 
-    // Sub título
+    // Subtítulo
     if (subTitle) {
       updateQuery += " subTitle=?,";
       values.push(subTitle);
