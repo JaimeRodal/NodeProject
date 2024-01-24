@@ -7,10 +7,18 @@ const getAnswersController = async (req, res, next) => {
   try {
     const { comment_id } = req.params;
 
-    const query = `SELECT u.name, ans.text
-    FROM answercomments ans
-    LEFT JOIN users u ON u.id = ans.user_id
-    WHERE ans.comment_id = ?
+    const query = `SELECT 
+    u.name AS user_name,
+    u.photo AS user_photo,
+    ans.text AS answer_text,
+    ans.createdAt AS answer_created_at
+FROM 
+    answercomments ans
+LEFT JOIN 
+    users u ON u.id = ans.user_id
+WHERE 
+    ans.comment_id = ?;
+
      `;
 
     const [getAnswer] = await pool.query(query, [comment_id]);

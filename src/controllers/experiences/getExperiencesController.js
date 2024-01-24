@@ -22,16 +22,17 @@ const getExperiencesController = async (req, res, next) => {
     u.name AS user_name,
     u.photo AS user_photo,
     CONCAT(
-        '[',
-        GROUP_CONCAT(
-            CONCAT(
-                '{"comment_id":"', c.id, '","comment_text":"', c.text, '", "comment_user":"', cu.name, '"}'
-            )
-            ORDER BY c.id
-            SEPARATOR ','
-        ),
-        ']'
-    ) AS comments
+      '[',
+      GROUP_CONCAT(
+          CONCAT(
+              '{"comment_id":"', c.id, '","comment_text":"', c.text, '", "comment_user":"', cu.name, '", "comment_user_photo":"', cu.photo, '", "comment_created_at":"', c.createdAt, '"}'
+          )
+          ORDER BY c.id
+          SEPARATOR ','
+      ),
+      ']'
+  ) AS comments
+  
 FROM 
     experiences exp
 JOIN 
