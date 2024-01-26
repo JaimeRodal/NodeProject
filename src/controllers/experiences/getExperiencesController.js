@@ -17,6 +17,7 @@ const getExperiencesController = async (req, res, next) => {
     exp.text,
     exp.photo,
     exp.createdAt,
+    exp.user_id,
     cat.name AS category_name,
     COALESCE(COUNT(v.exp_id), 0) AS likes,
     u.name AS user_name,
