@@ -1,4 +1,5 @@
 // Importaciones
+import getPool from "../../db/getPool.js";
 import insertComment from "../../models/comments/insertComments.js";
 import genError from "../../utils/helpers.js";
 
@@ -17,12 +18,21 @@ const insertCommentController = async (req, res, next) => {
       throw genError("No existe la experiencia en la que quieres comentar");
     }
     // Pasamos los parámetros anteriores a la función encargada de insertarlo (Ver descripción de la función en su respectivo archivo)
-    await insertComment({ text, exp_id, user_id });
+    const commentId = await insertComment({ text, exp_id, user_id });
+    const pool = await getPool();
+    const query = `SELECT u.name, u.photo, com.*
+    FROM comments com
+    LEFT JOIN users u ON u.id = com.user_id
+    WHERE com.id = ?
+     `;
+
+    const [[comment]] = await pool.query(query, [commentId]);
 
     // Respuesta
     res.status(201).json({
       status: "Correcto",
       message: "Comentario publicado",
+      data: comment,
     });
   } catch (error) {
     // En caso de error pasamos el error al middleware de gestión de errores

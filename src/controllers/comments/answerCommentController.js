@@ -19,12 +19,13 @@ const answerCommentController = async (req, res, next) => {
     }
 
     // Pasamos los parámetros anteriores a la función encargada de insertarlo (Ver descripción de la función en su respectivo archivo)
-    await insertAnswer({ text, comment_id, user_id });
+    const dataAnswer = await insertAnswer({ text, comment_id, user_id });
 
     // Respuesta
     res.status(201).json({
       status: "Correcto",
       message: "Comentario publicado",
+      data: dataAnswer,
     });
   } catch (error) {
     // En caso de error pasamos el error al middleware de gestión de errores
