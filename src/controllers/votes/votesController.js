@@ -53,18 +53,20 @@ const votesController = async (req, res, next) => {
     `,
         [id]
       );
+      console.log(votesStatus);
       // Respuesta
       res.send({
         status: "Correcto",
         message: `Has retirado el voto, Votos actuales: ${votesStatus.contador}`,
+        data: result,
       });
     } else {
       // De no existir el voto, lo añadimos
       await pool.query(
         `
-        INSERT INTO votes (user_id, exp_id) VALUES (?,?)
+        INSERT INTO votes (user_id, exp_id, isLiked) VALUES (?,?,?)
   `,
-        [userAuth, id]
+        [userAuth, id, 1]
       );
       // Comprobamos el contador de votos de la experiencia
       const [[votesStatus]] = await pool.query(
@@ -77,6 +79,7 @@ const votesController = async (req, res, next) => {
       res.send({
         status: "Correcto",
         message: `Has votado correctamente, Votos actuales: ${votesStatus.contador}`,
+        data: result,
       });
     }
   } catch (error) {

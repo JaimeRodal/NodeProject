@@ -87,6 +87,7 @@ const create = async () => {
             id INT AUTO_INCREMENT PRIMARY KEY,
             user_id INT NOT NULL,
             exp_id INT NOT NULL,
+            isLiked TINYINT,
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
             FOREIGN KEY(exp_id) REFERENCES experiences(id) ON DELETE CASCADE,
