@@ -19,16 +19,16 @@ const getExperiencesController = async (req, res, next) => {
     exp.createdAt,
     exp.user_id,
     cat.name AS category_name,
-    COALESCE(COUNT(v.exp_id), 0) AS likes,
+    COALESCE(COUNT(DISTINCT v.id), 0) AS likes,
     u.name AS user_name,
     u.photo AS user_photo,
     CONCAT(
       '[',
       GROUP_CONCAT(
-          CONCAT(
+        DISTINCT CONCAT(
               '{"comment_id":"', c.id, '","comment_text":"', c.text, '", "comment_user":"', cu.name, '", "comment_user_photo":"', cu.photo, '", "comment_created_at":"', c.createdAt, '"}'
           )
-          ORDER BY c.id
+          ORDER BY c.id DESC
           SEPARATOR ','
       ),
       ']'
@@ -49,7 +49,7 @@ LEFT JOIN
     const query_where = `WHERE 
             exp.place LIKE ? OR cat.name LIKE ? OR exp.title LIKE ? OR exp.subTitle LIKE ? OR exp.text LIKE ? OR u.name LIKE ?`;
     const query_group = `GROUP BY
-            exp.id`;
+            exp.id DESC`;
     const query_order = `ORDER BY 
             likes `;
 
