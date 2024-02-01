@@ -20,7 +20,7 @@ const create = async () => {
             lastName VARCHAR(50) NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL,
             password VARCHAR(200) NOT NULL,
-            photo VARCHAR(200),
+            photo VARCHAR(500),
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME ON UPDATE CURRENT_TIMESTAMP            
         )
@@ -43,7 +43,7 @@ const create = async () => {
             subTitle VARCHAR(50) NOT NULL,
             place VARCHAR(50) NOT NULL,
             text VARCHAR(500) NOT NULL,
-            photo VARCHAR(200),
+            photo VARCHAR(500),
             user_id INT NOT NULL,
             category_id INT NOT NULL,
             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
