@@ -94,7 +94,7 @@ LEFT JOIN
     else {
       query = query_list + "\n" + query;
       const [list] = await pool.query(query);
-      // console.log(list);
+      console.log(list);
       res.send({
         status: "Correcto",
         data: list,

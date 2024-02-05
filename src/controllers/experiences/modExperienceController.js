@@ -4,6 +4,7 @@ import fileUpload from "express-fileupload";
 import getPool from "../../db/getPool.js";
 import genError from "../../utils/helpers.js";
 import { HOST_DB, PORT } from "../../../env.js";
+import { nanoid } from "nanoid";
 
 // Definimos una variable para el uso de express
 const modifyApp = express();
@@ -44,7 +45,10 @@ const modifyExpController = async (req, res, next) => {
     let photoPath = null;
     if (req.files && req.files.avatar) {
       const avatar = req.files.avatar;
-      const finalFileName = Date.now() + "-" + avatar.name;
+      const avatarN = avatar.name;
+      const avatarFormat = avatarN.split(".");
+      const finalFileName =
+        nanoid() + "." + avatarFormat[avatarFormat.length - 1];
       avatar.mv(`./uploads/experiences/${finalFileName}`);
       photoPath = `http://${HOST_DB}:${PORT}/experiences/${finalFileName}`;
     }

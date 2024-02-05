@@ -29,7 +29,11 @@ const modify = async (req, res, next) => {
     let photoPath = null;
     if (req.files && req.files.photo) {
       const photo = req.files.photo;
-      const finalFileName = nanoid() + "-" + photo.name;
+      const photoN = photo.name;
+      const photoFormat = photoN.split(".");
+
+      const finalFileName =
+        nanoid() + "." + photoFormat[photoFormat.length - 1];
       photo.mv(`./uploads/users/${finalFileName}`);
       photoPath = `http://${HOST_DB}:${PORT}/users/${finalFileName}`;
     }

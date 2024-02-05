@@ -35,9 +35,13 @@ const insertExperienceController = async (req, res, next) => {
 
     // Obtener la imagen
     const photo = req.files.photo;
+    const photoN = photo.name;
+
+    const photoFormat = photoN.split(".");
 
     // Guardar la imagen en la carpeta "uploads"
-    const nombreArchivoFinal = nanoid() + "-" + photo.name;
+    const nombreArchivoFinal =
+      nanoid() + "." + photoFormat[photoFormat.length - 1];
     photo.mv(`./uploads/experiences/${nombreArchivoFinal}`);
 
     // Establecer la ruta de la foto en caso de que se haya subido
