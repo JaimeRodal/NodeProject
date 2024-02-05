@@ -24,6 +24,9 @@ const register = async (req, res, next) => {
       // Establecer la ruta de la foto en caso de que se haya subido
       photoPath = `
       http://${HOST_DB}:${PORT}/users/${nombreArchivoFinal}`;
+    } else {
+      // Si no se cargó el archivo, se le asigna un icono por defecto
+      photoPath = `http://${HOST_DB}:${PORT}/UserIcon.png`;
     }
     // Verificar si el email ya está en uso
     await emailExist(email);
