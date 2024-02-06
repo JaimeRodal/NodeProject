@@ -64,9 +64,9 @@ const votesController = async (req, res, next) => {
       // De no existir el voto, lo añadimos
       await pool.query(
         `
-        INSERT INTO votes (user_id, exp_id, isLiked) VALUES (?,?,?)
+        INSERT INTO votes (user_id, exp_id) VALUES (?,?)
   `,
-        [userAuth, id, 1]
+        [userAuth, id]
       );
       // Comprobamos el contador de votos de la experiencia
       const [[votesStatus]] = await pool.query(

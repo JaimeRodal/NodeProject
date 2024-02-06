@@ -50,9 +50,9 @@ LEFT JOIN
     const query_where = `WHERE 
             exp.place LIKE ? OR cat.name LIKE ? OR exp.title LIKE ? OR exp.subTitle LIKE ? OR exp.text LIKE ? OR u.name LIKE ?`;
     const query_group = `GROUP BY
+            exp.id `;
+    let query_order = ` ORDER BY 
             exp.id DESC`;
-    const query_order = `ORDER BY 
-            likes `;
 
     // hay 2 opciones principales: lista simple o lista filtrada
     const query_list = query_select + "\n" + query_group;
@@ -66,13 +66,9 @@ LEFT JOIN
 
     // si se quiere ordenar por votos, se añade el order by al final de la query
     if (orderBy === "votes" && orderDirection) {
-      query = query + "\n" + query_order;
-      if (orderDirection === "ASC") {
-        query = query + "ASC";
-      } else if (orderDirection === "DESC") {
-        query = query + "DESC";
-      }
+      query_order = " ORDER BY likes " + orderDirection;
     }
+    query += query_order;
 
     // si se va a filtrar por un texto, se elige la lista filtrada, se realiza la búsqueda y se devuelve el resultado
     if (search) {
