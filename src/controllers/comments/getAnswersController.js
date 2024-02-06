@@ -9,6 +9,7 @@ const getAnswersController = async (req, res, next) => {
 
     const query = `SELECT 
     u.name AS user_name,
+    u.lastName AS user_lastName,
     u.photo AS user_photo,
     ans.text AS answer_text,
     ans.createdAt AS answer_created_at

@@ -21,12 +21,13 @@ const getExperiencesController = async (req, res, next) => {
     cat.name AS category_name,
     COALESCE(COUNT(DISTINCT v.id), 0) AS likes,
     u.name AS user_name,
+    u.lastName AS user_lastName,
     u.photo AS user_photo,
     CONCAT(
       '[',
       GROUP_CONCAT(
         DISTINCT CONCAT(
-              '{"comment_id":"', c.id, '","comment_text":"', c.text, '", "comment_user":"', cu.name, '", "comment_user_photo":"', cu.photo, '", "comment_created_at":"', c.createdAt, '"}'
+              '{"comment_id":"', c.id, '","comment_text":"', c.text, '", "comment_user":"', cu.name, '", "comment_userLast":"', cu.lastName, '", "comment_user_photo":"', cu.photo, '", "comment_created_at":"', c.createdAt, '"}'
           )
           ORDER BY c.id DESC
           SEPARATOR ','
