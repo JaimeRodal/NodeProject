@@ -26,8 +26,7 @@ const register = async (req, res, next) => {
       photo.mv(`./uploads/users/${nombreArchivoFinal}`);
 
       // Establecer la ruta de la foto en caso de que se haya subido
-      photoPath = `
-      http://${HOST_DB}:${PORT}/users/${nombreArchivoFinal}`;
+      photoPath = `http://${HOST_DB}:${PORT}/users/${nombreArchivoFinal}`;
     } else {
       // Si no se cargó el archivo, se le asigna un icono por defecto
       photoPath = `http://${HOST_DB}:${PORT}/UserIcon.png`;
