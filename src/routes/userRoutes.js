@@ -16,7 +16,7 @@ import getUserController from "../controllers/users/getUserController.js";
 const router = express.Router();
 
 // Creamos las distintas rutas con sus métodos
-router.get("/user/:id", Auth, getUserController);
+router.get("/user/:id", getUserController);
 router.post("/register", validation(registerSchema), registerController);
 router.post("/login", validation(loginSchema), loginController);
 router.delete(

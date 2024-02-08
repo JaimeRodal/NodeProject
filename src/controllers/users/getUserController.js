@@ -6,18 +6,23 @@ const pool = await getPool();
 const getUserController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const authUserId = req.auth;
+    // const authUserId = req.auth;
 
-    if (String(authUserId) !== String(id)) {
-      throw genError("No tienes permisos para obtener este usuario", 403);
-    }
+    // if (String(authUserId) !== String(id)) {
+    //   throw genError("No tienes permisos para obtener este usuario", 403);
+    // }
 
     const query_select = `SELECT 
-    u.*,
+    u.id,
+    u.name,
+    u.lastName,
+    u.email,
+    u.photo,
+    u.createdAt,
     CONCAT(
         '[',
         GROUP_CONCAT(
-            '{"title":"', exp.title, '"}'
+            '{"id":"', exp.id, '","title":"', exp.title, '", "created_at":"', exp.createdAt, '", "place":"', exp.place, '","photo":"', exp.photo, '","user_id":"', exp.user_id, '"}'
             SEPARATOR ','
         ),
         ']'

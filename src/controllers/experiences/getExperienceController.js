@@ -14,61 +14,43 @@ const getExperienceController = async (req, res, next) => {
     // Realizamos la búsqueda en DB de la experiencia pasándole el parámetro anterior como condición
 
     const query_select = `SELECT 
+    exp.id,
     exp.title,
     exp.subTitle,
     exp.place,
     exp.text,
     exp.photo,
+    exp.createdAt,
+    exp.user_id,
     cat.name AS category_name,
-    COALESCE(COUNT(v.exp_id), 0) AS likes,
+    COALESCE(COUNT(DISTINCT v.id), 0) AS likes,
     u.name AS user_name,
+    u.lastName AS user_lastName,
     u.photo AS user_photo,
     CONCAT(
-        '[',
-        GROUP_CONCAT(
-            CONCAT(
-                '{"comment_text":"', c.text, '", "comment_user":"', cu.name, '", "answers": ',
-                COALESCE(
-                    (SELECT 
-                        CONCAT(
-                            '[',
-                            GROUP_CONCAT(
-                                CONCAT(
-                                    '{"answer_text":"', ans.text, '", "answer_user":"', au.name, '"}'
-                                )
-                                ORDER BY ans.id
-                                SEPARATOR ','
-                            ),
-                            ']'
-                        )
-                    FROM answerComments ans
-                    JOIN users au ON ans.user_id = au.id
-                    WHERE ans.comment_id = c.id),
-                    '[]'
-                ),
-                '}'
-            )
-            ORDER BY c.id
-            SEPARATOR ','
-        ),
-        ']'
-    ) AS comments_and_answers
-        FROM 
-            experiences exp
-        JOIN 
-            categories cat ON exp.category_id = cat.id 
-        JOIN 
-            users u ON exp.user_id = u.id
-        LEFT JOIN 
-            votes v ON exp.id = v.exp_id
-        LEFT JOIN 
-            comments c ON exp.id = c.exp_id
-        LEFT JOIN 
-            answerComments ans ON c.id = ans.comment_id
-        LEFT JOIN 
-            users cu ON c.user_id = cu.id
-        LEFT JOIN 
-            users au ON ans.user_id = au.id`;
+      '[',
+      GROUP_CONCAT(
+        DISTINCT CONCAT(
+              '{"comment_id":"', c.id, '","comment_text":"', c.text, '", "comment_user":"', cu.name, '", "comment_userLast":"', cu.lastName, '", "comment_user_photo":"', cu.photo, '", "comment_created_at":"', c.createdAt, '"}'
+          )
+          ORDER BY c.id DESC
+          SEPARATOR ','
+      ),
+      ']'
+  ) AS comments
+  
+FROM 
+    experiences exp
+JOIN 
+    categories cat ON exp.category_id = cat.id 
+JOIN 
+    users u ON exp.user_id = u.id
+LEFT JOIN 
+    votes v ON exp.id = v.exp_id
+LEFT JOIN 
+    comments c ON exp.id = c.exp_id
+LEFT JOIN 
+    users cu ON c.user_id = cu.id`;
 
     const query_one_experience = "WHERE exp.id = ?";
     const query = query_select + "\n" + query_one_experience;
