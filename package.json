@@ -7,7 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "createDb": "node src/db/initDb.js"
+    "createDb": "node src/db/initDb.js",
+    "createUsers": "node src/db/usersEx.js",
+    "createExp": "node src/db/experiencesEx.js"
   },
   "keywords": [],
   "author": "",

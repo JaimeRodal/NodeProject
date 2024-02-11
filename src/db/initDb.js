@@ -96,16 +96,16 @@ const create = async () => {
     console.log("Insertando valores iniciales a categorías...");
     await pool.query(`
         INSERT INTO categories (name) VALUES
-  ('Adventure'),
-  ('Nature'),
-  ('Travel'),
-  ('Food'),
-  ('Technology'),
-  ('History'),
-  ('Art'),
-  ('Science'),
-  ('Music'),
-  ('Sports');
+            ('Adventure'),
+            ('Nature'),
+            ('Travel'),
+            ('Food'),
+            ('Technology'),
+            ('History'),
+            ('Art'),
+            ('Science'),
+            ('Music'),
+            ('Sports');
         `);
     await pool.end();
   } catch (error) {
