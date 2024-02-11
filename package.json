@@ -9,7 +9,8 @@
     "start": "nodemon app.js",
     "createDb": "node src/db/initDb.js",
     "createUsers": "node src/db/usersEx.js",
-    "createExp": "node src/db/experiencesEx.js"
+    "createExp": "node src/db/experiencesEx.js",
+    "createComments": "node src/db/commentsEx.js"
   },
   "keywords": [],
   "author": "",
