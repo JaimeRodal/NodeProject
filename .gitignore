@@ -1,5 +1,7 @@
 node_modules
 .env
-src/uploads
-*.jpg
-*.png
+src/uploads/users/
+src/uploads/experiences/
+src/uploads/*.jpg
+src/uploads/*.png
+!src/uploads/examples/
