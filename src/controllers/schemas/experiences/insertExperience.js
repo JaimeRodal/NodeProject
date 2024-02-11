@@ -25,7 +25,7 @@ const experienceSchema = Joi.object({
   text: Joi.string()
     .pattern(/^[a-zA-ZÀ-ÖØ-öø-ÿç\s'0-9,.:;!¡?¿()"`~*%#-_@]+$/u)
     .min(10)
-    .max(300)
+    .max(500)
     .required(),
 
   photoPath: [Joi.string()],
