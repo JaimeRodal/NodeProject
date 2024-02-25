@@ -72,7 +72,7 @@ const exp = [
     text: 'Fui a visitar a mi prima a Londres y me hizo un pequeño tour por la ciudad, lo que más me gustó fue el Museo de historia Natural, es un lugar impresionante donde hay fósiles de dinosaurio, distintos esqueletos de mamíferos e incluso la recreación de una ballena azul a tamaño real en el techo, lo pasé genial, ojalá poder volver pronto!', 
     photo: `http://${HOST_DB}:${PORT}/examples/museo-historia-natural-londres.png`, 
     user_id: '5', 
-    category_id: '5'
+    category_id: '8'
   },
 ]
 createExperiences(exp);
