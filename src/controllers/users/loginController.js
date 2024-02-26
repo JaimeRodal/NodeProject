@@ -41,7 +41,7 @@ const login = async (req, res, next) => {
       },
       TOKEN_SECRET,
       {
-        expiresIn: "2d",
+        expiresIn: "2h",
       }
     );
 
@@ -50,7 +50,7 @@ const login = async (req, res, next) => {
       status: "Correcto",
       message: "Bienvenid@",
       token,
-      id:userFound.id,
+      id: userFound.id,
       name: userFound.name,
       lastName: userFound.lastName,
       photoPath: userFound.photo,
