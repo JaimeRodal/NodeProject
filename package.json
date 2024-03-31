@@ -10,7 +10,9 @@
     "createDb": "node src/db/initDb.js",
     "createUsers": "node src/db/usersEx.js",
     "createExp": "node src/db/experiencesEx.js",
-    "createComments": "node src/db/commentsEx.js"
+    "createComments": "node src/db/commentsEx.js",
+    "createAll": "npm run createDb & npm run createUsers & npm run createExp & npm run createComments",
+    "startAll": "npm run createAll & npm start"
   },
   "keywords": [],
   "author": "",
